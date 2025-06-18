@@ -512,8 +512,45 @@
         }
 
         function openBlogPost(filename) {
-            // Open the markdown file in a new tab
-            window.open(`Blog/${filename}`, '_blank');
+            const post = blogPostsData[filename];
+            if (!post) {
+                console.error("Blog post data not found for:", filename);
+                return;
+            }
+
+            // Create the HTML for the new tab
+            const newTabHtml = `
+                <!DOCTYPE html>
+                <html lang="en">
+                <head>
+                    <meta charset="UTF-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <title>${post.title}</title>
+                    <script src="https://cdn.tailwindcss.com"><\/script>
+                    <style>
+                        body { font-family: 'Inter', sans-serif; }
+                        .prose { max-width: 800px; margin: 2rem auto; padding: 2rem; }
+                        .prose h1 { font-size: 2.5rem; font-weight: 800; }
+                        .prose h2 { font-size: 2rem; font-weight: 700; }
+                        .prose p { margin-bottom: 1rem; line-height: 1.7; }
+                        .prose pre { background-color: #1e293b; color: #e2e8f0; padding: 1rem; border-radius: 0.5rem; overflow-x: auto;}
+                        .prose code { font-family: monospace; }
+                        .prose a { color: #4f46e5; text-decoration: underline; }
+                    <\/style>
+                </head>
+                <body class="bg-gray-100">
+                    <article class="prose">
+                        ${post.htmlContent}
+                    </article>
+                </body>
+                </html>
+            `;
+            
+            // Open the new tab using a data URL
+            const newTab = window.open();
+            newTab.document.open();
+            newTab.document.write(newTabHtml);
+            newTab.document.close();
         }
     </script>
 </body>
