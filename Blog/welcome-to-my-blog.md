@@ -1,0 +1,47 @@
+---
+title: Welcome to My Blog
+date: 2025-06-18
+excerpt: This is my first blog post where I introduce myself and share my thoughts about AI, software engineering, and technology.
+tags: introduction, ai, software-engineering
+---
+
+# Welcome to My Blog
+
+Hello and welcome to my personal blog! I'm excited to share my journey as a Software Engineer and AI Enthusiast with you.
+
+## About This Blog
+
+This blog will be a place where I share:
+
+- **Technical insights** from my work with AI and machine learning
+- **Thoughts on technology** trends and their impact on our future
+- **Learning experiences** from what I learn everyday - whatever that is
+
+## What You Can Expect
+
+I'll be writing about various topics including:
+
+### AI and Machine Learning
+- Model optimization techniques
+- Inference performance improvements
+- Real-world AI applications
+
+### Software Engineering
+- Best practices and design patterns
+- Tools and technologies I'm using
+- Challenges and solutions in building scalable systems
+
+### Open Source Contributions
+- My experience contributing to llama.cpp
+- Tips for getting started with open-source projects
+- The importance of community in software development
+
+## Stay Connected
+
+I'm always interested in connecting with fellow developers, AI enthusiasts, and anyone passionate about technology. Feel free to reach out through my social media links or email.
+
+Thank you for visiting, and I hope you find the content here valuable and inspiring!
+
+---
+
+*This post was published on June 18, 2025*
