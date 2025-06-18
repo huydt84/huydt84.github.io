@@ -49,29 +49,14 @@
         }
 
         .project-card,
-        .about-card,
-        .blog-card {
+        .about-card {
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
         .project-card:hover,
-        .about-card:hover,
-        .blog-card:hover {
+        .about-card:hover {
             transform: translateY(-8px);
             box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-        }
-
-        .blog-meta {
-            color: #6b7280;
-            font-size: 0.875rem;
-        }
-
-        .blog-excerpt {
-            display: -webkit-box;
-            -webkit-line-clamp: 3;
-            line-clamp: 3;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
         }
     </style>
 </head>
@@ -107,8 +92,6 @@
                             class="nav-link py-2 transition-colors hover:text-indigo-600">Experience</a></li>
                     <li><a href="#projects" onclick="showSection('projects', event)"
                             class="nav-link py-2 transition-colors hover:text-indigo-600">Projects</a></li>
-                    <li><a href="#blog" onclick="showSection('blog', event)"
-                            class="nav-link py-2 transition-colors hover:text-indigo-600">Blog</a></li>
                 </ul>
             </div>
         </div>
@@ -324,17 +307,6 @@
             </div>
         </section>
 
-        <!-- Blog Section -->
-        <section id="blog" class="section">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-800">Blog</h2>
-            <div id="blog-container" class="max-w-4xl mx-auto">
-                <div class="text-center text-gray-500 py-12">
-                    <i class="fas fa-spinner fa-spin text-2xl mb-4"></i>
-                    <p>Loading blog posts...</p>
-                </div>
-            </div>
-        </section>
-
     </main>
 
     <!-- Footer -->
@@ -363,9 +335,6 @@
 
             document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
             document.querySelector('.nav-link[href="#about"]').classList.add('active');
-
-            // Load blog posts when DOM is ready
-            loadBlogPosts();
         });
 
         function showSection(sectionId, event) {
@@ -387,170 +356,6 @@
                 link.classList.remove('active');
             });
             event.currentTarget.classList.add('active');
-        }
-
-        // Blog functionality
-        async function loadBlogPosts() {
-            const blogContainer = document.getElementById('blog-container');
-
-            try {
-                // List of blog post files (you'll need to update this manually when adding new posts)
-                const blogPosts = [
-                    'welcome-to-my-blog.md',
-                ];
-
-                if (blogPosts.length === 0) {
-                    blogContainer.innerHTML = `
-                        <div class="text-center text-gray-500 py-12">
-                            <i class="fas fa-pen-alt text-2xl mb-4"></i>
-                            <p>No blog posts yet. Coming soon!</p>
-                        </div>
-                    `;
-                    return;
-                }
-
-                const posts = await Promise.all(
-                    blogPosts.map(async (filename) => {
-                        try {
-                            const response = await fetch(`Blog/${filename}`);
-                            const content = await response.text();
-                            return parseBlogPost(content, filename);
-                        } catch (error) {
-                            console.error(`Error loading ${filename}:`, error);
-                            return null;
-                        }
-                    })
-                );
-
-                const validPosts = posts.filter(post => post !== null);
-
-                if (validPosts.length === 0) {
-                    blogContainer.innerHTML = `
-                        <div class="text-center text-gray-500 py-12">
-                            <i class="fas fa-exclamation-triangle text-2xl mb-4"></i>
-                            <p>Error loading blog posts.</p>
-                        </div>
-                    `;
-                    return;
-                }
-
-                // Sort posts by date (newest first)
-                validPosts.sort((a, b) => new Date(b.date) - new Date(a.date));
-
-                blogContainer.innerHTML = validPosts.map(post => createBlogPostCard(post)).join('');
-            } catch (error) {
-                console.error('Error loading blog posts:', error);
-                blogContainer.innerHTML = `
-                    <div class="text-center text-gray-500 py-12">
-                        <i class="fas fa-exclamation-triangle text-2xl mb-4"></i>
-                        <p>Error loading blog posts.</p>
-                    </div>
-                `;
-            }
-        }
-
-        function parseBlogPost(content, filename) {
-            // Simple markdown frontmatter parser
-            const frontmatterRegex = /^---\s*\n([\s\S]*?)\n---\s*\n([\s\S]*)$/;
-            const match = content.match(frontmatterRegex);
-
-            if (!match) {
-                // No frontmatter, create basic post data
-                return {
-                    title: filename.replace('.md', '').replace(/-/g, ' '),
-                    date: new Date().toISOString().split('T')[0],
-                    excerpt: content.substring(0, 200) + '...',
-                    content: content,
-                    filename: filename
-                };
-            }
-
-            const frontmatter = match[1];
-            const body = match[2];
-
-            const metadata = {};
-            frontmatter.split('\n').forEach(line => {
-                const colonIndex = line.indexOf(':');
-                if (colonIndex > 0) {
-                    const key = line.substring(0, colonIndex).trim();
-                    const value = line.substring(colonIndex + 1).trim().replace(/^["']|["']$/g, '');
-                    metadata[key] = value;
-                }
-            });
-
-            return {
-                title: metadata.title || filename.replace('.md', '').replace(/-/g, ' '),
-                date: metadata.date || new Date().toISOString().split('T')[0],
-                excerpt: metadata.excerpt || body.substring(0, 200) + '...',
-                tags: metadata.tags ? metadata.tags.split(',').map(tag => tag.trim()) : [],
-                content: body,
-                filename: filename
-            };
-        }
-
-        function createBlogPostCard(post) {
-            const tagsHtml = post.tags && post.tags.length > 0
-                ? `<div class="flex flex-wrap gap-2 mt-3">
-                     ${post.tags.map(tag => `<span class="bg-indigo-100 text-indigo-700 text-xs font-medium px-2 py-1 rounded-full">${tag}</span>`).join('')}
-                   </div>`
-                : '';
-
-            return `
-                <article class="bg-white rounded-2xl shadow-lg p-6 mb-6 blog-card cursor-pointer" onclick="openBlogPost('${post.filename}')">
-                    <h3 class="text-xl font-bold text-gray-800 mb-2">${post.title}</h3>
-                    <div class="blog-meta mb-3">
-                        <i class="fas fa-calendar-alt mr-2"></i>
-                        ${new Date(post.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
-                    </div>
-                    <p class="text-gray-600 blog-excerpt mb-3">${post.excerpt}</p>
-                    ${tagsHtml}
-                    <div class="mt-4 text-indigo-600 font-medium hover:text-indigo-800 transition-colors">
-                        Read more <i class="fas fa-arrow-right ml-1"></i>
-                    </div>
-                </article>
-            `;
-        }
-
-        function openBlogPost(filename) {
-            const post = blogPostsData[filename];
-            if (!post) {
-                console.error("Blog post data not found for:", filename);
-                return;
-            }
-
-            // Create the HTML for the new tab
-            const newTabHtml = `
-                <!DOCTYPE html>
-                <html lang="en">
-                <head>
-                    <meta charset="UTF-8">
-                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                    <title>${post.title}</title>
-                    <script src="https://cdn.tailwindcss.com"><\/script>
-                    <style>
-                        body { font-family: 'Inter', sans-serif; }
-                        .prose { max-width: 800px; margin: 2rem auto; padding: 2rem; }
-                        .prose h1 { font-size: 2.5rem; font-weight: 800; }
-                        .prose h2 { font-size: 2rem; font-weight: 700; }
-                        .prose p { margin-bottom: 1rem; line-height: 1.7; }
-                        .prose pre { background-color: #1e293b; color: #e2e8f0; padding: 1rem; border-radius: 0.5rem; overflow-x: auto;}
-                        .prose code { font-family: monospace; }
-                        .prose a { color: #4f46e5; text-decoration: underline; }
-                    <\/style>
-                </head>
-                <body class="bg-gray-100">
-                    <article class="prose">
-                        ${post.htmlContent}
-                    </article>
-                </body>
-                </html>
-            `;
-            
-            // Open the new tab using a data URL
-            const newTab = window.open();
-            newTab.document.open();
-            newTab.document.write(newTabHtml);
-            newTab.document.close();
         }
     </script>
 </body>
