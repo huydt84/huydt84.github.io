@@ -14,7 +14,10 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
   canonical="/blog"
 >
   <div class="mx-auto max-w-4xl px-4 py-16">
-    <h1 class="text-3xl sm:text-4xl font-bold tracking-tight mb-2">Blog</h1>
+    <a href="/" class="mb-8 inline-flex text-sm text-muted-foreground hover:text-foreground transition-colors">
+      &larr; Home
+    </a>
+    <h1 class="text-3xl sm:text-4xl font-bold tracking-tight mb-2 mt-4">Blog</h1>
     <p class="text-muted-foreground mb-10">
       Thoughts on AI, software engineering, and technology.
     </p>
