@@ -2,10 +2,11 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Header from "../components/site/Header.astro";
 import Hero from "../components/site/Hero.astro";
-import ProjectCard from "../components/site/ProjectCard.astro";
+import WorkCard from "../components/site/WorkCard.astro";
 import ExperienceTimeline from "../components/site/ExperienceTimeline.astro";
 import SkillCloud from "../components/site/SkillCloud.astro";
 import BlogCard from "../components/site/BlogCard.astro";
+import SectionHeading from "../components/site/SectionHeading.astro";
 import Footer from "../components/site/Footer.astro";
 import { getLocaleContent } from "../data/i18n";
 import { getBlogSlug, getLocalizedBlogPosts } from "../lib/blog";
@@ -26,22 +27,22 @@ const recentPosts = (await getLocalizedBlogPosts(locale)).slice(0, 3);
   <Hero locale={locale} />
 
   <main class="mx-auto max-w-4xl px-4">
-    <section id="projects" class="mb-20 scroll-mt-20">
-      <h2 class="mb-8 text-2xl font-bold tracking-tight">{copy.ui.selectedTechnicalWork}</h2>
+    <section class="mb-20">
+      <SectionHeading id="work" title={copy.ui.selectedTechnicalWork} />
       <div class="grid gap-5 sm:grid-cols-2">
-        {copy.technicalWork.map((project) => (
-          <ProjectCard project={project} />
+        {copy.selectedWork.map((work) => (
+          <WorkCard work={work} />
         ))}
       </div>
     </section>
 
-    <section id="experience" class="mb-20 scroll-mt-20">
-      <h2 class="mb-8 text-2xl font-bold tracking-tight">{copy.ui.experience}</h2>
+    <section class="mb-20">
+      <SectionHeading id="experience" title={copy.ui.experience} />
       <ExperienceTimeline experiences={copy.experiences} />
     </section>
 
-    <section id="blog" class="mb-20 scroll-mt-20">
-      <h2 class="mb-8 text-2xl font-bold tracking-tight">{copy.ui.technicalWriting}</h2>
+    <section class="mb-20">
+      <SectionHeading id="writing" title={copy.ui.technicalWriting} />
       {recentPosts.length === 0 ? (
         <div class="rounded-lg border border-dashed p-8 text-center">
           <p class="text-muted-foreground">{copy.ui.blogComingSoon}</p>
@@ -72,13 +73,13 @@ const recentPosts = (await getLocalizedBlogPosts(locale)).slice(0, 3);
       )}
     </section>
 
-    <section id="skills" class="mb-20 scroll-mt-20">
-      <h2 class="mb-8 text-2xl font-bold tracking-tight">{copy.ui.skills}</h2>
+    <section class="mb-20">
+      <SectionHeading id="skills" title={copy.ui.skills} />
       <SkillCloud skills={copy.skills} />
     </section>
 
-    <section id="about" class="mb-20 scroll-mt-20">
-      <h2 class="mb-8 text-2xl font-bold tracking-tight">{copy.ui.aboutSection}</h2>
+    <section class="mb-20">
+      <SectionHeading id="about" title={copy.ui.aboutSection} />
       <div class="max-w-3xl space-y-4 text-muted-foreground">
         {copy.about.map((p) => (
           <p class="leading-relaxed">{p}</p>

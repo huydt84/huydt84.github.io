@@ -1,6 +1,6 @@
 import type { Locale } from "@/lib/locale";
 
-export interface ProjectItem {
+export interface WorkItem {
   name: string;
   description: string;
   tags: string[];
@@ -34,14 +34,15 @@ export interface LocaleContent {
     home: string;
     blog: string;
     about: string;
+    work: string;
     experience: string;
-    projects: string;
     skills: string;
+    writing: string;
     language: string;
     theme: string;
     openMenu: string;
     closeMenu: string;
-    viewProjects: string;
+    viewWork: string;
     readBlog: string;
     selectedTechnicalWork: string;
     technicalWriting: string;
@@ -67,7 +68,7 @@ export interface LocaleContent {
     location: string;
   };
   about: string[];
-  technicalWork: ProjectItem[];
+  selectedWork: WorkItem[];
   experiences: ExperienceItem[];
   skills: SkillGroup[];
   socials: SocialItem[];
@@ -84,14 +85,15 @@ export const localeContent: Record<Locale, LocaleContent> = {
       home: "Home",
       blog: "Blog",
       about: "About",
+      work: "Work",
       experience: "Experience",
-      projects: "Projects",
       skills: "Skills",
+      writing: "Writing",
       language: "Language",
       theme: "Theme",
       openMenu: "Open menu",
       closeMenu: "Close menu",
-      viewProjects: "View Projects",
+      viewWork: "View Work",
       readBlog: "Read Blog",
       selectedTechnicalWork: "Selected Technical Work",
       technicalWriting: "Technical Writing",
@@ -118,10 +120,10 @@ export const localeContent: Record<Locale, LocaleContent> = {
       location: "Japan",
     },
     about: [
-      "I am a passionate and results-oriented AI Engineer with a Bachelor's degree in Information Technology from Hanoi University of Science and Technology (GPA 3.5). I have a strong interest in AI and machine learning, with hands-on experience building chatbots, optimizing model inference, and contributing to open-source projects such as llama.cpp.",
+      "I am a passionate and results-oriented AI Engineer with a Bachelor's degree in Information Technology from Hanoi University of Science and Technology (GPA 3.5). I have a strong interest in AI and machine learning, with hands-on experience building chatbots, optimizing model inference, and contributing to open-source repos such as llama.cpp.",
       "I enjoy solving complex problems and building end-to-end systems, from data crawling and model training to deployment and UI development. My goal is to use technology to create efficient, practical, and impactful solutions.",
     ],
-    technicalWork: [
+    selectedWork: [
       {
         name: "MLX Server Runtime",
         description:
@@ -151,30 +153,6 @@ export const localeContent: Record<Locale, LocaleContent> = {
         description:
           "Enterprise chatbot for internal documents with improved indexing, retrieval, and response time by 30%.",
         tags: ["AI", "Chatbot", "llama.cpp", "RAG"],
-      },
-      {
-        name: "End-to-End Vietnamese Text-to-Speech System",
-        description:
-          "Built datasets and trained dialect-specific TTS models for five voices, then optimized inference through ONNX deployment and containerization. Delivered an end-to-end pipeline for crawling news, processing data, and generating audio with Vietnamese TTS models.",
-        tags: ["Python", "ONNX", "Docker", "TTS"],
-      },
-      {
-        name: "Hanoi House Price Prediction",
-        description:
-          "Created a web app to predict rent prices with a pipeline for daily data crawling, model evaluation, and automatic retraining when data drift was detected.",
-        tags: ["Python", "Data Science", "MLOps", "Web App"],
-      },
-      {
-        name: "Taxpayer Verification Tool",
-        description:
-          "Built a tool that achieved 93% accuracy in CAPTCHA recognition and reduced manual verification time by 83%.",
-        tags: ["Deep Learning", "CNN", "Web App"],
-      },
-      {
-        name: "Talking Avatar POC",
-        description:
-          "Created a proof-of-concept web platform that generates human-like talking-head videos from text using pre-trained models.",
-        tags: ["SadTalker", "Tacotron2", "Web App"],
       },
     ],
     experiences: [
@@ -277,14 +255,15 @@ export const localeContent: Record<Locale, LocaleContent> = {
       home: "Trang chủ",
       blog: "Blog",
       about: "Giới thiệu",
+      work: "Dự án",
       experience: "Kinh nghiệm",
-      projects: "Dự án",
       skills: "Kỹ năng",
+      writing: "Bài viết",
       language: "Ngôn ngữ",
       theme: "Giao diện",
       openMenu: "Mở menu",
       closeMenu: "Đóng menu",
-      viewProjects: "Xem dự án",
+      viewWork: "Xem nội dung",
       readBlog: "Đọc blog",
       selectedTechnicalWork: "Dự án chuyên môn",
       technicalWriting: "Bài viết kỹ thuật",
@@ -314,7 +293,7 @@ export const localeContent: Record<Locale, LocaleContent> = {
       "Tôi là một kỹ sư AI đam mê công nghệ và định hướng kết quả, có bằng Cử nhân Công nghệ Thông tin tại Đại học Bách khoa Hà Nội (GPA 3.5). Tôi đặc biệt quan tâm đến AI và machine learning, với kinh nghiệm thực tế trong việc xây dựng chatbot, tối ưu suy luận mô hình và đóng góp cho các dự án mã nguồn mở như llama.cpp.",
       "Tôi thích giải các bài toán phức tạp và xây dựng hệ thống end-to-end, từ thu thập dữ liệu, huấn luyện mô hình đến triển khai và phát triển giao diện. Mục tiêu của tôi là dùng công nghệ để tạo ra những giải pháp hiệu quả, thiết thực và có tác động rõ ràng.",
     ],
-    technicalWork: [
+    selectedWork: [
       {
         name: "MLX Server Runtime",
         description:
@@ -344,30 +323,6 @@ export const localeContent: Record<Locale, LocaleContent> = {
         description:
           "Chatbot doanh nghiệp dành cho tài liệu nội bộ, với quy trình indexing và retrieval được cải thiện, giúp giảm 30% thời gian phản hồi.",
         tags: ["AI", "Chatbot", "llama.cpp", "RAG"],
-      },
-      {
-        name: "Hệ thống TTS tiếng Việt end-to-end",
-        description:
-          "Xây dựng bộ dữ liệu và huấn luyện mô hình TTS theo phương ngữ cho 5 giọng đọc, sau đó tối ưu suy luận thông qua triển khai ONNX và container hóa. Hoàn thiện pipeline end-to-end để thu thập tin tức, xử lý dữ liệu và tạo âm thanh bằng các mô hình TTS tiếng Việt.",
-        tags: ["Python", "ONNX", "Docker", "TTS"],
-      },
-      {
-        name: "Dự đoán giá nhà Hà Nội",
-        description:
-          "Xây dựng web app dự đoán giá thuê cùng pipeline thu thập dữ liệu hằng ngày, đánh giá mô hình và tự động huấn luyện lại khi phát hiện data drift.",
-        tags: ["Python", "Data Science", "MLOps", "Web App"],
-      },
-      {
-        name: "Công cụ xác minh người nộp thuế",
-        description:
-          "Xây dựng công cụ đạt độ chính xác 93% trong nhận dạng CAPTCHA và giảm 83% thời gian xác minh thủ công.",
-        tags: ["Deep Learning", "CNN", "Web App"],
-      },
-      {
-        name: "PoC Talking Avatar",
-        description:
-          "Xây dựng nền tảng web proof-of-concept có khả năng tạo video talking-head chân thực từ văn bản bằng các mô hình tiền huấn luyện.",
-        tags: ["SadTalker", "Tacotron2", "Web App"],
       },
     ],
     experiences: [
@@ -470,14 +425,15 @@ export const localeContent: Record<Locale, LocaleContent> = {
       home: "ホーム",
       blog: "ブログ",
       about: "概要",
+      work: "作品",
       experience: "経歴",
-      projects: "プロジェクト",
       skills: "スキル",
+      writing: "執筆",
       language: "言語",
       theme: "テーマ",
       openMenu: "メニューを開く",
       closeMenu: "メニューを閉じる",
-      viewProjects: "プロジェクトを見る",
+      viewWork: "作品を見る",
       readBlog: "ブログを読む",
       selectedTechnicalWork: "主な技術プロジェクト",
       technicalWriting: "技術記事",
@@ -507,7 +463,7 @@ export const localeContent: Record<Locale, LocaleContent> = {
       "私は情熱と成果志向を持つAIエンジニアです。ハノイ工科大学で情報技術の学士号を取得し、GPAは3.5でした。AIと機械学習に強い関心があり、チャットボットの構築、モデル推論の最適化、llama.cppなどのオープンソースプロジェクトへの貢献に取り組んできました。",
       "データ収集やモデル学習から、デプロイやUI開発まで、エンドツーエンドのシステムを作ることが好きです。技術を通じて、効率的で実用的、そして価値のある解決策を生み出すことが私の目標です。",
     ],
-    technicalWork: [
+    selectedWork: [
       {
         name: "MLX Server Runtime",
         description:
@@ -537,30 +493,6 @@ export const localeContent: Record<Locale, LocaleContent> = {
         description:
           "社内文書向けのエンタープライズチャットボット。インデックス作成と検索を改善し、応答時間を30%短縮しました。",
         tags: ["AI", "Chatbot", "llama.cpp", "RAG"],
-      },
-      {
-        name: "ベトナム語音声合成システム",
-        description:
-          "5種類の音声向けに方言別TTSモデルのデータセットを構築して学習を行い、ONNXデプロイとコンテナ化によって推論を最適化しました。ニュース収集、データ処理、ベトナム語TTSモデルによる音声生成までを担うエンドツーエンドパイプラインも構築しました。",
-        tags: ["Python", "ONNX", "Docker", "TTS"],
-      },
-      {
-        name: "ハノイの住宅価格予測",
-        description:
-          "日次データ収集、モデル評価、データドリフト時の自動再学習を備えたパイプラインで、賃貸価格を予測するWebアプリを作成しました。",
-        tags: ["Python", "Data Science", "MLOps", "Web App"],
-      },
-      {
-        name: "納税者確認ツール",
-        description:
-          "CAPTCHA認識で93%の精度を達成し、手作業の確認時間を83%削減するツールを開発しました。",
-        tags: ["Deep Learning", "CNN", "Web App"],
-      },
-      {
-        name: "トーキングアバターPOC",
-        description:
-          "事前学習済みモデルを使って、テキストから人間らしいトーキングヘッド動画を生成するWebプラットフォームのPoCを作成しました。",
-        tags: ["SadTalker", "Tacotron2", "Web App"],
       },
     ],
     experiences: [

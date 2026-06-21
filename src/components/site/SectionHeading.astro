@@ -1,0 +1,19 @@
+---
+export interface Props {
+  id: string;
+  title: string;
+}
+
+const { id, title } = Astro.props;
+---
+
+<h2 id={id} class="group scroll-mt-24 text-2xl font-bold tracking-tight">
+  <a
+    href={`#${id}`}
+    aria-label={`Link to ${title} section`}
+    class="inline-flex items-center gap-2 rounded-sm transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+  >
+    <span>{title}</span>
+    <span aria-hidden="true" class="text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100 group-focus-within:opacity-100">#</span>
+  </a>
+</h2>
