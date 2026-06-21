@@ -9,7 +9,7 @@ export interface Experience {
 export const experiences: Experience[] = [
   {
     company: "avatarin",
-    role: "AI Team Lead",
+    role: "AI Engineer",
     location: "Tokyo, Japan",
     period: "Oct 2025 - Present",
     highlights: [
