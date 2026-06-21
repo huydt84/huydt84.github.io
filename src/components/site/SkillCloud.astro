@@ -1,15 +1,23 @@
 ---
 import { Badge } from "@/components/ui/badge";
+import type { SkillGroup } from "@/data/i18n";
 
 export interface Props {
-  skills: string[];
+  skills: SkillGroup[];
 }
 
 const { skills } = Astro.props;
 ---
 
-<div class="flex flex-wrap justify-center gap-2">
-  {skills.map((skill: string) => (
-    <Badge variant="outline" className="px-3 py-1.5 text-sm">{skill}</Badge>
+<div class="space-y-6">
+  {skills.map((group) => (
+    <div>
+      <h3 class="mb-3 text-sm font-semibold uppercase tracking-wider text-muted-foreground">{group.category}</h3>
+      <div class="flex flex-wrap gap-2">
+        {group.items.map((skill: string) => (
+          <Badge variant="outline" className="px-3 py-1.5 text-sm">{skill}</Badge>
+        ))}
+      </div>
+    </div>
   ))}
 </div>

@@ -26,9 +26,9 @@ const recentPosts = (await getLocalizedBlogPosts(locale)).slice(0, 3);
 
   <main class="mx-auto max-w-4xl px-4">
     <section id="projects" class="mb-20 scroll-mt-20">
-      <h2 class="mb-8 text-2xl font-bold tracking-tight">{copy.ui.featuredProjects}</h2>
+      <h2 class="mb-8 text-2xl font-bold tracking-tight">{copy.ui.selectedTechnicalWork}</h2>
       <div class="grid gap-5 sm:grid-cols-2">
-        {copy.projects.map((project) => (
+        {copy.technicalWork.map((project) => (
           <ProjectCard project={project} />
         ))}
       </div>
@@ -40,7 +40,7 @@ const recentPosts = (await getLocalizedBlogPosts(locale)).slice(0, 3);
     </section>
 
     <section id="blog" class="mb-20 scroll-mt-20">
-      <h2 class="mb-8 text-2xl font-bold tracking-tight">{copy.ui.latestBlogPosts}</h2>
+      <h2 class="mb-8 text-2xl font-bold tracking-tight">{copy.ui.technicalWriting}</h2>
       {recentPosts.length === 0 ? (
         <div class="rounded-lg border border-dashed p-8 text-center">
           <p class="text-muted-foreground">{copy.ui.blogComingSoon}</p>

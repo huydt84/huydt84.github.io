@@ -6,4 +6,4 @@ export interface Project {
 
 import { getLocaleContent } from "./i18n";
 
-export const projects: Project[] = getLocaleContent("en").projects;
+export const projects: Project[] = getLocaleContent("en").technicalWork;

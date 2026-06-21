@@ -1,3 +1,5 @@
-import { getLocaleContent } from "./i18n";
+import { getLocaleContent, type SkillGroup } from "./i18n";
 
-export const skills: string[] = getLocaleContent("en").skills;
+export type { SkillGroup };
+
+export const skills: SkillGroup[] = getLocaleContent("en").skills;

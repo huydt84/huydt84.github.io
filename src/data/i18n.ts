@@ -20,6 +20,11 @@ export interface SocialItem {
   icon: string;
 }
 
+export interface SkillGroup {
+  category: string;
+  items: string[];
+}
+
 export interface LocaleContent {
   meta: {
     siteTitle: string;
@@ -38,8 +43,8 @@ export interface LocaleContent {
     closeMenu: string;
     viewProjects: string;
     readBlog: string;
-    featuredProjects: string;
-    latestBlogPosts: string;
+    selectedTechnicalWork: string;
+    technicalWriting: string;
     blogComingSoon: string;
     viewAllPosts: string;
     noPosts: string;
@@ -62,9 +67,9 @@ export interface LocaleContent {
     location: string;
   };
   about: string[];
-  projects: ProjectItem[];
+  technicalWork: ProjectItem[];
   experiences: ExperienceItem[];
-  skills: string[];
+  skills: SkillGroup[];
   socials: SocialItem[];
 }
 
@@ -88,8 +93,8 @@ export const localeContent: Record<Locale, LocaleContent> = {
       closeMenu: "Close menu",
       viewProjects: "View Projects",
       readBlog: "Read Blog",
-      featuredProjects: "Featured Projects",
-      latestBlogPosts: "Latest Blog Posts",
+      selectedTechnicalWork: "Selected Technical Work",
+      technicalWriting: "Technical Writing",
       blogComingSoon: "Blog posts coming soon.",
       viewAllPosts: "View all posts",
       noPosts: "No blog posts yet.",
@@ -107,20 +112,44 @@ export const localeContent: Record<Locale, LocaleContent> = {
       copyright: "All rights reserved.",
     },
     hero: {
-      headline: "AI Engineer building production RAG and conversational AI systems.",
+      headline: "AI Engineer building LLM inference and production AI systems.",
       tagline:
-        "Focused on LLM serving, retrieval systems, RAG pipelines, and production AI infrastructure.",
+        "Focused on LLM serving, batching, retrieval systems, KV-cache optimization, and performance-oriented backend infrastructure.",
       location: "Japan",
     },
     about: [
       "I am a passionate and results-oriented AI Engineer with a Bachelor's degree in Information Technology from Hanoi University of Science and Technology (GPA 3.5). I have a strong interest in AI and machine learning, with hands-on experience building chatbots, optimizing model inference, and contributing to open-source projects such as llama.cpp.",
       "I enjoy solving complex problems and building end-to-end systems, from data crawling and model training to deployment and UI development. My goal is to use technology to create efficient, practical, and impactful solutions.",
     ],
-    projects: [
+    technicalWork: [
+      {
+        name: "MLX Server Runtime",
+        description:
+          "LLM inference server runtime on Apple Silicon with a Rust control plane and Python MLX worker, supporting batching, streaming, cancellation, and benchmark validation.",
+        tags: ["MLX", "Rust", "Python", "LLM Serving"],
+      },
+      {
+        name: "LLM Request Clustering / KV Cache Reuse",
+        description:
+          "Routing and clustering mechanism to maximize KV-cache reuse and improve serving efficiency in LLM servers.",
+        tags: ["KV cache", "batching", "LLM Serving", "Rust"],
+      },
+      {
+        name: "Rust Tokenizer Sidecar",
+        description:
+          "Optimized moderation and tokenization sidecar reaching approximately 20x throughput over a Python Triton baseline.",
+        tags: ["Rust", "tokenizer", "performance", "moderation"],
+      },
+      {
+        name: "RAG / Document QA Pipeline",
+        description:
+          "Document processing, indexing, semantic search, reranking, caching, and query filtering pipeline that reduced search operations by about 25%.",
+        tags: ["RAG", "Vector Databases", "semantic search", "reranking"],
+      },
       {
         name: "ChatEI Chatbot",
         description:
-          "Built a chatbot for answering questions from internal documents, improving indexing, retrieval, and response time by 30%.",
+          "Enterprise chatbot for internal documents with improved indexing, retrieval, and response time by 30%.",
         tags: ["AI", "Chatbot", "llama.cpp", "RAG"],
       },
       {
@@ -155,11 +184,9 @@ export const localeContent: Record<Locale, LocaleContent> = {
         location: "Tokyo, Japan",
         period: "Oct 2025 - Present",
         highlights: [
-          "Lead a team of four engineers building production RAG and conversational AI systems.",
-          "Designed and implemented a document processing and retrieval pipeline with parsing, chunking, vector database indexing, semantic search, and reranking, reducing search operations by about 25% through caching and query filtering.",
-          "Built guided conversational agents for QA and flight-booking use cases with the Parlant framework and reduced LLM calls by 50% through custom optimization.",
-          "Developed a two-layer text moderation system and optimized a sidecar service with a Rust tokenizer, reaching 20x higher throughput than a Python Triton server.",
-          "Designed request clustering and routing mechanisms to maximize KV-cache reuse in LLM servers and improve inference efficiency.",
+          "Led a team of four engineers building production RAG and conversational AI systems.",
+          "Built document processing and retrieval pipelines with parsing, chunking, vector indexing, semantic search, reranking, caching, and query filtering.",
+          "Optimized LLM-serving components including request clustering, KV-cache reuse, moderation, and a Rust tokenizer sidecar reaching 20x throughput over a Python baseline.",
         ],
       },
       {
@@ -168,10 +195,9 @@ export const localeContent: Record<Locale, LocaleContent> = {
         location: "Tokyo, Japan",
         period: "Nov 2024 - Sep 2025",
         highlights: [
-          "Built enterprise RAG products including ChatEI, a document QA chatbot, and Intelligent Search, an agent-based search strategy generator.",
-          "Improved document indexing and retrieval by supporting multimodal inputs and automated retrieval workflows with agents.",
-          "Reduced first-response latency from 3.5s to 2.5s, a 30% improvement, through search optimization, embedding inference acceleration with llama.cpp, and caching.",
-          "Contributed to both backend services and UI development.",
+          "Built enterprise RAG products including ChatEI, document QA, and agent-based search workflows.",
+          "Reduced first-response latency from 3.5s to 2.5s through search optimization, embedding inference acceleration with llama.cpp, and caching.",
+          "Contributed to backend services and UI development where needed.",
         ],
       },
       {
@@ -197,18 +223,26 @@ export const localeContent: Record<Locale, LocaleContent> = {
       },
     ],
     skills: [
-      "Python",
-      "PyTorch",
-      "TensorFlow",
-      "FastAPI",
-      "Django",
-      "Flask",
-      "Node.js",
-      "Flutter",
-      "Docker",
-      "Vector Databases",
-      "MongoDB",
-      "Git",
+      {
+        category: "LLM Serving",
+        items: ["MLX", "llama.cpp", "KV cache", "batching"],
+      },
+      {
+        category: "Retrieval",
+        items: ["RAG", "Vector Databases", "semantic search", "reranking", "embedding models", "ranking models"],
+      },
+      {
+        category: "Backend",
+        items: ["Python", "FastAPI", "Rust", "Node.js"],
+      },
+      {
+        category: "Infra",
+        items: ["Docker", "MongoDB", "Git"],
+      },
+      {
+        category: "ML",
+        items: ["PyTorch", "ONNX", "TensorFlow"],
+      },
     ],
     socials: [
       {
@@ -252,8 +286,8 @@ export const localeContent: Record<Locale, LocaleContent> = {
       closeMenu: "Đóng menu",
       viewProjects: "Xem dự án",
       readBlog: "Đọc blog",
-      featuredProjects: "Dự án nổi bật",
-      latestBlogPosts: "Bài viết mới nhất",
+      selectedTechnicalWork: "Dự án chuyên môn",
+      technicalWriting: "Bài viết kỹ thuật",
       blogComingSoon: "Bài viết sẽ sớm ra mắt.",
       viewAllPosts: "Xem tất cả bài viết",
       noPosts: "Chưa có bài viết nào.",
@@ -271,20 +305,44 @@ export const localeContent: Record<Locale, LocaleContent> = {
       copyright: "Mọi quyền được bảo lưu.",
     },
     hero: {
-      headline: "Kỹ sư AI xây dựng hệ thống RAG và hội thoại AI cho môi trường sản xuất.",
+      headline: "Kỹ sư AI xây dựng hệ thống suy luận LLM và AI sản xuất.",
       tagline:
-        "Tập trung vào LLM serving, hệ thống truy xuất, pipeline RAG và hạ tầng AI sản xuất.",
+        "Tập trung vào LLM serving, batching, hệ thống truy xuất, tối ưu KV-cache và hạ tầng backend hiệu năng cao.",
       location: "Nhật Bản",
     },
     about: [
       "Tôi là một kỹ sư AI yêu thích giải quyết vấn đề và hướng đến kết quả, tốt nghiệp Cử nhân Công nghệ Thông tin tại Đại học Bách khoa Hà Nội (GPA 3.5). Tôi có niềm đam mê lớn với AI và machine learning, cùng kinh nghiệm thực tế trong xây dựng chatbot, tối ưu suy luận mô hình và đóng góp cho các dự án mã nguồn mở như llama.cpp.",
       "Tôi thích giải các bài toán phức tạp và xây dựng hệ thống end-to-end, từ thu thập dữ liệu, huấn luyện mô hình đến triển khai và phát triển giao diện. Mục tiêu của tôi là dùng công nghệ để tạo ra những giải pháp hiệu quả, thiết thực và có tác động rõ ràng.",
     ],
-    projects: [
+    technicalWork: [
+      {
+        name: "MLX Server Runtime",
+        description:
+          "Máy chủ suy luận LLM trên Apple Silicon với control plane Rust và worker Python MLX, hỗ trợ batching, streaming, hủy tác vụ và kiểm tra hiệu năng.",
+        tags: ["MLX", "Rust", "Python", "LLM Serving"],
+      },
+      {
+        name: "Phân cụm yêu cầu / Tái sử dụng KV Cache",
+        description:
+          "Cơ chế định tuyến và phân cụm để tối đa hóa tái sử dụng KV-cache và cải thiện hiệu quả serving trong máy chủ LLM.",
+        tags: ["KV cache", "batching", "LLM Serving", "Rust"],
+      },
+      {
+        name: "Rust Tokenizer Sidecar",
+        description:
+          "Sidecar moderation và tokenization được tối ưu, đạt throughput cao hơn khoảng 20 lần so với baseline Python Triton.",
+        tags: ["Rust", "tokenizer", "performance", "moderation"],
+      },
+      {
+        name: "Pipeline RAG / Hỏi đáp tài liệu",
+        description:
+          "Pipeline xử lý tài liệu, đánh chỉ mục, tìm kiếm ngữ nghĩa, reranking, caching và lọc truy vấn, giúp giảm khoảng 25% số thao tác tìm kiếm.",
+        tags: ["RAG", "Vector Databases", "semantic search", "reranking"],
+      },
       {
         name: "ChatEI Chatbot",
         description:
-          "Xây dựng chatbot trả lời câu hỏi từ tài liệu nội bộ, giúp cải thiện indexing, retrieval và thời gian phản hồi nhanh hơn 30%.",
+          "Chatbot doanh nghiệp cho tài liệu nội bộ với cải thiện indexing, retrieval và thời gian phản hồi nhanh hơn 30%.",
         tags: ["AI", "Chatbot", "llama.cpp", "RAG"],
       },
       {
@@ -320,10 +378,8 @@ export const localeContent: Record<Locale, LocaleContent> = {
         period: "Oct 2025 - Present",
         highlights: [
           "Dẫn dắt nhóm 4 kỹ sư xây dựng hệ thống RAG và hội thoại AI cho môi trường sản xuất.",
-          "Thiết kế và triển khai pipeline xử lý tài liệu và truy xuất gồm parsing, chunking, indexing vector database, semantic search và reranking, giúp giảm khoảng 25% số thao tác tìm kiếm nhờ caching và query filtering.",
-          "Xây dựng conversational agent có hướng dẫn cho các use case QA và đặt vé máy bay bằng Parlant framework; giảm 50% số lần gọi LLM nhờ tối ưu riêng.",
-          "Phát triển hệ thống moderation văn bản hai lớp và tối ưu sidecar service với Rust tokenizer, đạt throughput cao hơn 20 lần so với Python Triton server.",
-          "Thiết kế cơ chế clustering và routing request để tăng khả năng tái sử dụng KV-cache trong LLM server và cải thiện hiệu năng suy luận.",
+          "Xây dựng pipeline xử lý tài liệu và truy xuất gồm parsing, chunking, vector indexing, semantic search, reranking, caching và query filtering.",
+          "Tối ưu các thành phần LLM-serving gồm request clustering, tái sử dụng KV-cache, moderation và Rust tokenizer sidecar đạt throughput cao gấp 20 lần so với baseline Python.",
         ],
       },
       {
@@ -332,10 +388,9 @@ export const localeContent: Record<Locale, LocaleContent> = {
         location: "Tokyo, Japan",
         period: "Nov 2024 - Sep 2025",
         highlights: [
-          "Xây dựng các sản phẩm RAG cho doanh nghiệp gồm ChatEI, chatbot hỏi đáp tài liệu, và Intelligent Search, công cụ tạo chiến lược tìm kiếm dựa trên agent.",
-          "Cải thiện indexing và retrieval tài liệu bằng cách hỗ trợ đầu vào đa phương thức và tự động hóa workflow truy xuất với agent.",
-          "Giảm độ trễ phản hồi đầu tiên từ 3.5s xuống 2.5s, tức cải thiện 30%, thông qua tối ưu search, tăng tốc embedding inference bằng llama.cpp và caching.",
-          "Tham gia cả backend services lẫn phát triển giao diện.",
+          "Xây dựng các sản phẩm RAG cho doanh nghiệp gồm ChatEI, chatbot hỏi đáp tài liệu và agent-based search workflow.",
+          "Giảm độ trễ phản hồi đầu tiên từ 3.5s xuống 2.5s thông qua tối ưu search, tăng tốc embedding inference bằng llama.cpp và caching.",
+          "Đóng góp vào cả backend services và phát triển giao diện khi cần.",
         ],
       },
       {
@@ -361,18 +416,26 @@ export const localeContent: Record<Locale, LocaleContent> = {
       },
     ],
     skills: [
-      "Python",
-      "PyTorch",
-      "TensorFlow",
-      "FastAPI",
-      "Django",
-      "Flask",
-      "Node.js",
-      "Flutter",
-      "Docker",
-      "Vector Databases",
-      "MongoDB",
-      "Git",
+      {
+        category: "LLM Serving",
+        items: ["MLX", "llama.cpp", "KV cache", "batching"],
+      },
+      {
+        category: "Retrieval",
+        items: ["RAG", "Vector Databases", "semantic search", "reranking", "embedding models", "ranking models"],
+      },
+      {
+        category: "Backend",
+        items: ["Python", "FastAPI", "Rust", "Node.js"],
+      },
+      {
+        category: "Infra",
+        items: ["Docker", "MongoDB", "Git"],
+      },
+      {
+        category: "ML",
+        items: ["PyTorch", "ONNX", "TensorFlow"],
+      },
     ],
     socials: [
       {
@@ -416,8 +479,8 @@ export const localeContent: Record<Locale, LocaleContent> = {
       closeMenu: "メニューを閉じる",
       viewProjects: "プロジェクトを見る",
       readBlog: "ブログを読む",
-      featuredProjects: "注目プロジェクト",
-      latestBlogPosts: "最新ブログ",
+      selectedTechnicalWork: "厳選した技術成果",
+      technicalWriting: "技術記事",
       blogComingSoon: "ブログ記事は近日公開予定です。",
       viewAllPosts: "すべての記事を見る",
       noPosts: "ブログ記事はまだありません。",
@@ -435,16 +498,40 @@ export const localeContent: Record<Locale, LocaleContent> = {
       copyright: "無断転載を禁じます。",
     },
     hero: {
-      headline: "プロダクション向けのRAGと会話AIシステムを構築するAIエンジニア。",
+      headline: "LLM推論とプロダクションAIシステムを構築するAIエンジニア。",
       tagline:
-        "LLMサービング、検索システム、RAGパイプライン、プロダクションAI基盤に注力しています。",
+        "LLMサービング、バッチ処理、検索システム、KVキャッシュ最適化、パフォーマンス重視のバックエンド基盤に注力しています。",
       location: "日本",
     },
     about: [
       "私は問題解決を楽しむ結果志向のAIエンジニアです。ハノイ工科大学で情報技術の学士号を取得し、GPAは3.5でした。AIと機械学習に強い関心があり、チャットボットの構築、モデル推論の最適化、llama.cppのようなオープンソースプロジェクトへの貢献を実践してきました。",
       "データ収集やモデル学習から、デプロイやUI開発まで、エンドツーエンドのシステムを作ることが好きです。技術を通じて、効率的で実用的、そして価値のある解決策を生み出すことが私の目標です。",
     ],
-    projects: [
+    technicalWork: [
+      {
+        name: "MLX Server Runtime",
+        description:
+          "RustコントロールプレーンとPython MLXワーカーを備えたApple Silicon向けLLM推論サーバーランタイム。バッチ処理、ストリーミング、キャンセル、ベンチマーク検証をサポート。",
+        tags: ["MLX", "Rust", "Python", "LLM Serving"],
+      },
+      {
+        name: "LLMリクエストクラスタリング / KVキャッシュ再利用",
+        description:
+          "LLMサーバーでのKVキャッシュ再利用を最大化し、推論効率を改善するルーティングおよびクラスタリング機構。",
+        tags: ["KV cache", "batching", "LLM Serving", "Rust"],
+      },
+      {
+        name: "Rust Tokenizer Sidecar",
+        description:
+          "最適化されたモデレーションおよびトークナイゼーションサイドカー。Python Tritonベースラインの約20倍のスループットを達成。",
+        tags: ["Rust", "tokenizer", "performance", "moderation"],
+      },
+      {
+        name: "RAG / 文書QAパイプライン",
+        description:
+          "文書処理、インデックス作成、セマンティック検索、再ランキング、キャッシュ、クエリフィルタリングを備えたパイプライン。検索操作を約25%削減。",
+        tags: ["RAG", "Vector Databases", "semantic search", "reranking"],
+      },
       {
         name: "ChatEI チャットボット",
         description:
@@ -484,10 +571,8 @@ export const localeContent: Record<Locale, LocaleContent> = {
         period: "Oct 2025 - Present",
         highlights: [
           "本番環境向けのRAGと会話AIシステムを開発する4人チームをリードしています。",
-          "パース、チャンク分割、ベクターデータベースのインデックス作成、セマンティック検索、再ランキングを含む文書処理・検索パイプラインを設計・実装し、キャッシュとクエリフィルタリングにより検索操作を約25%削減しました。",
-          "Parlantフレームワークを用いたQAおよび航空券予約向けのガイド付き会話エージェントを構築し、独自最適化でLLM呼び出しを50%削減しました。",
-          "二層のテキストモデレーションシステムを開発し、Rust tokenizerを使ったサイドカーサービスを最適化して、Python Triton serverの20倍のスループットを達成しました。",
-          "LLMサーバーでKV-cacheの再利用を最大化するためのリクエストクラスタリングとルーティング機構を設計し、推論効率を改善しました。",
+          "パース、チャンク分割、ベクターインデックス、セマンティック検索、再ランキング、キャッシュ、クエリフィルタリングを含む文書処理および検索パイプラインを構築しました。",
+          "LLMサービングコンポーネント（リクエストクラスタリング、KVキャッシュ再利用、モデレーション、Rust tokenizerサイドカー）を最適化し、Pythonベースライン比20倍のスループットを達成しました。",
         ],
       },
       {
@@ -496,10 +581,9 @@ export const localeContent: Record<Locale, LocaleContent> = {
         location: "Tokyo, Japan",
         period: "Nov 2024 - Sep 2025",
         highlights: [
-          "ChatEIや Intelligent Search など、企業向けRAG製品を開発しました。",
-          "マルチモーダル入力対応とエージェントによる自動検索ワークフローで、文書のインデックス作成と検索を改善しました。",
-          "検索最適化、llama.cppによる埋め込み推論の高速化、キャッシュの導入により、初回応答レイテンシを3.5秒から2.5秒へ、30%改善しました。",
-          "バックエンドサービスとUI開発の両方に貢献しました。",
+          "ChatEI、文書QA、エージェントベースの検索ワークフローを含むエンタープライズRAG製品を構築しました。",
+          "検索最適化、llama.cppによる埋め込み推論の高速化、キャッシュにより、初回応答レイテンシを3.5秒から2.5秒に短縮しました。",
+          "バックエンドサービスとUI開発の両方に必要な範囲で貢献しました。",
         ],
       },
       {
@@ -525,18 +609,26 @@ export const localeContent: Record<Locale, LocaleContent> = {
       },
     ],
     skills: [
-      "Python",
-      "PyTorch",
-      "TensorFlow",
-      "FastAPI",
-      "Django",
-      "Flask",
-      "Node.js",
-      "Flutter",
-      "Docker",
-      "Vector Databases",
-      "MongoDB",
-      "Git",
+      {
+        category: "LLM Serving",
+        items: ["MLX", "llama.cpp", "KV cache", "batching"],
+      },
+      {
+        category: "Retrieval",
+        items: ["RAG", "Vector Databases", "semantic search", "reranking", "embedding models", "ranking models"],
+      },
+      {
+        category: "Backend",
+        items: ["Python", "FastAPI", "Rust", "Node.js"],
+      },
+      {
+        category: "Infra",
+        items: ["Docker", "MongoDB", "Git"],
+      },
+      {
+        category: "ML",
+        items: ["PyTorch", "ONNX", "TensorFlow"],
+      },
     ],
     socials: [
       {
