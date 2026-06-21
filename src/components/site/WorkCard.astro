@@ -1,6 +1,5 @@
 ---
 import type { WorkItem } from "@/data/work";
-import { Badge } from "@/components/ui/badge";
 
 export interface Props {
   work: WorkItem;
@@ -11,10 +10,5 @@ const { work } = Astro.props;
 
 <div class="group rounded-lg border bg-card p-5 hover:shadow-md transition-shadow">
   <h3 class="mb-2 text-lg font-semibold">{work.name}</h3>
-  <p class="mb-4 text-sm text-muted-foreground leading-relaxed">{work.description}</p>
-  <div class="flex flex-wrap gap-1.5">
-    {work.tags.map((tag: string) => (
-      <Badge variant="secondary" className="">{tag}</Badge>
-    ))}
-  </div>
+  <p class="text-sm text-muted-foreground leading-relaxed">{work.description}</p>
 </div>

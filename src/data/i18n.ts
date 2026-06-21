@@ -3,7 +3,6 @@ import type { Locale } from "@/lib/locale";
 export interface WorkItem {
   name: string;
   description: string;
-  tags: string[];
 }
 
 export interface ExperienceItem {
@@ -128,31 +127,26 @@ export const localeContent: Record<Locale, LocaleContent> = {
         name: "avatarin EMI",
         description:
           "Enterprise AI platform for RAG and conversational AI, with multimodal document processing, advanced semantic retrieval, flow-guided agents, text/image moderation, and model serving optimization.",
-        tags: ["RAG", "Parlant", "Moderation", "KV-cache", "Rust sidecar"],
       },
       {
         name: "ChatEI / Enterprise Document QA",
         description:
           "Enterprise document QA and intelligent search product with agent-based retrieval and large-scale multimodal document processing",
-        tags: ["RAG", "Document QA", "Agent search", "llama.cpp", "Caching"],
       },
       {
         name: "MLX Server Runtime",
         description:
           "Personal LLM serving runtime for Apple Silicon, focused on low-overhead inference with Rust-frontend, with support for image input, SSE streaming, backpressure, Prometheus telemetry, Worker supervision, continuous batching scheduler, comes with benchmark suite.",
-        tags: ["MLX", "Apple Silicon", "Rust", "Streaming", "Batching"],
       },
       {
         name: "End-to-End Vietnamese Text-to-Speech System",
         description:
           "Vietnamese TTS system with dialect-specific models trained on self-curated dataset, ONNX deployment, containerization, and automated news-fetching news-to-audio generation",
-        tags: ["Vietnamese TTS", "5 voices", "ONNX", "Docker", "News-to-audio"],
       },
       {
         name: "Taxpayer Verification Tool",
         description:
           "Internal taxpayer verification automation tool with document upload, data extraction and CAPTCHA recognition.",
-        tags: ["Automation", "Data extraction", "CAPTCHA", "93% accuracy", "83% faster"],
       },
     ],
     experiences: [
@@ -298,31 +292,26 @@ export const localeContent: Record<Locale, LocaleContent> = {
         name: "avatarin EMI",
         description:
           "Nền tảng AI doanh nghiệp cho RAG và AI hội thoại, với xử lý tài liệu đa phương thức, truy xuất ngữ nghĩa nâng cao, flow-guided agent, moderation văn bản/hình ảnh và tối ưu model serving.",
-        tags: ["RAG", "Parlant", "Moderation", "KV-cache", "Rust sidecar"],
       },
       {
         name: "ChatEI / Hỏi đáp tài liệu doanh nghiệp",
         description:
           "Sản phẩm hỏi đáp tài liệu và tìm kiếm thông minh cho doanh nghiệp, với truy xuất dựa trên agent và xử lý tài liệu đa phương thức quy mô lớn",
-        tags: ["RAG", "Hỏi đáp tài liệu", "Tìm kiếm agent", "llama.cpp", "Caching"],
       },
       {
         name: "MLX Server Runtime",
         description:
           "LLM serving runtime cá nhân cho Apple Silicon, tập trung vào suy luận low-overhead với Rust frontend, hỗ trợ đầu vào hình ảnh, SSE streaming, backpressure, Prometheus telemetry, worker supervision, continuous batching scheduler, đi kèm với benchmark suite.",
-        tags: ["MLX", "Apple Silicon", "Rust", "Streaming", "Batching"],
       },
       {
         name: "Hệ thống chuyển văn bản tiếng Việt thành giọng nói end-to-end",
         description:
           "Hệ thống TTS tiếng Việt với các mô hình theo vùng miền được huấn luyện trên bộ dữ liệu tự thu thập và gán nhãn, triển khai ONNX, container hóa và tự động lấy tin tức để chuyển thành audio",
-        tags: ["TTS tiếng Việt", "5 giọng đọc", "ONNX", "Docker", "Tin tức thành audio"],
       },
       {
         name: "Công cụ xác minh người nộp thuế",
         description:
           "Công cụ tự động hóa nội bộ để xác minh người nộp thuế, hỗ trợ tự động upload tài liệu, trích xuất dữ liệu và nhận dạng CAPTCHA.",
-        tags: ["Tự động hóa", "Trích xuất dữ liệu", "CAPTCHA", "Độ chính xác 93%", "Nhanh hơn 83%"],
       },
     ],
     experiences: [
@@ -468,31 +457,26 @@ export const localeContent: Record<Locale, LocaleContent> = {
         name: "avatarin EMI",
         description:
           "マルチモーダル文書処理、高度なセマンティック検索、フロー誘導型エージェント、テキスト・画像モデレーション、モデルサービング最適化を備えたRAG・会話AI向けエンタープライズAI基盤。",
-        tags: ["RAG", "Parlant", "モデレーション", "KVキャッシュ", "Rustサイドカー"],
       },
       {
         name: "ChatEI / エンタープライズ文書QA",
         description:
           "エージェントベースの検索と大規模マルチモーダル文書処理を備えた、企業向け文書QA・インテリジェント検索製品",
-        tags: ["RAG", "文書QA", "エージェント検索", "llama.cpp", "キャッシュ"],
       },
       {
         name: "MLX Server Runtime",
         description:
           "Rustフロントエンドによる低オーバーヘッド推論に注力し、画像入力、SSEストリーミング、バックプレッシャー、Prometheusテレメトリ、Worker監視、継続的バッチ処理スケジューラ、ベンチマークスイートを備えたApple Silicon向け個人開発のLLMサービングランタイム。",
-        tags: ["MLX", "Apple Silicon", "Rust", "ストリーミング", "バッチ処理"],
       },
       {
         name: "エンドツーエンド・ベトナム語音声合成システム",
         description:
           "独自に収集・選定したデータセットで学習した方言別モデル、ONNXデプロイ、コンテナ化、ニュース取得から音声化までの自動生成を備えたベトナム語TTSシステム",
-        tags: ["ベトナム語TTS", "5音声", "ONNX", "Docker", "ニュース音声化"],
       },
       {
         name: "納税者確認ツール",
         description:
           "文書アップロード、データ抽出、CAPTCHA認識に対応した社内向け納税者確認自動化ツール。",
-        tags: ["自動化", "データ抽出", "CAPTCHA", "精度93%", "83%高速化"],
       },
     ],
     experiences: [
