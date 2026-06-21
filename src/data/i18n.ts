@@ -271,7 +271,7 @@ export const localeContent: Record<Locale, LocaleContent> = {
     meta: {
       siteTitle: "Dinh Trong Huy - Kỹ sư AI",
       siteDescription:
-        "Kỹ sư AI tập trung vào suy luận LLM, serving, batching, truy xuất thông tin và hạ tầng AI sản xuất.",
+        "Kỹ sư AI tập trung vào suy luận LLM, LLM serving, batching, hệ thống truy xuất và hạ tầng AI trong môi trường production.",
     },
     ui: {
       home: "Trang chủ",
@@ -305,32 +305,32 @@ export const localeContent: Record<Locale, LocaleContent> = {
       copyright: "Mọi quyền được bảo lưu.",
     },
     hero: {
-      headline: "Kỹ sư AI xây dựng hệ thống suy luận LLM và AI sản xuất.",
+      headline: "Kỹ sư AI xây dựng hệ thống suy luận LLM và hệ thống AI cho môi trường production.",
       tagline:
         "Tập trung vào LLM serving, batching, hệ thống truy xuất, tối ưu KV-cache và hạ tầng backend hiệu năng cao.",
       location: "Nhật Bản",
     },
     about: [
-      "Tôi là một kỹ sư AI yêu thích giải quyết vấn đề và hướng đến kết quả, tốt nghiệp Cử nhân Công nghệ Thông tin tại Đại học Bách khoa Hà Nội (GPA 3.5). Tôi có niềm đam mê lớn với AI và machine learning, cùng kinh nghiệm thực tế trong xây dựng chatbot, tối ưu suy luận mô hình và đóng góp cho các dự án mã nguồn mở như llama.cpp.",
+      "Tôi là một kỹ sư AI đam mê công nghệ và định hướng kết quả, có bằng Cử nhân Công nghệ Thông tin tại Đại học Bách khoa Hà Nội (GPA 3.5). Tôi đặc biệt quan tâm đến AI và machine learning, với kinh nghiệm thực tế trong việc xây dựng chatbot, tối ưu suy luận mô hình và đóng góp cho các dự án mã nguồn mở như llama.cpp.",
       "Tôi thích giải các bài toán phức tạp và xây dựng hệ thống end-to-end, từ thu thập dữ liệu, huấn luyện mô hình đến triển khai và phát triển giao diện. Mục tiêu của tôi là dùng công nghệ để tạo ra những giải pháp hiệu quả, thiết thực và có tác động rõ ràng.",
     ],
     technicalWork: [
       {
         name: "MLX Server Runtime",
         description:
-          "Máy chủ suy luận LLM trên Apple Silicon với control plane Rust và worker Python MLX, hỗ trợ batching, streaming, hủy tác vụ và kiểm tra hiệu năng.",
+          "Runtime máy chủ suy luận LLM trên Apple Silicon với control plane viết bằng Rust và MLX worker viết bằng Python, hỗ trợ batching, streaming, hủy yêu cầu và xác thực bằng benchmark.",
         tags: ["MLX", "Rust", "Python", "LLM Serving"],
       },
       {
         name: "Phân cụm yêu cầu / Tái sử dụng KV Cache",
         description:
-          "Cơ chế định tuyến và phân cụm để tối đa hóa tái sử dụng KV-cache và cải thiện hiệu quả serving trong máy chủ LLM.",
+          "Cơ chế định tuyến và phân cụm nhằm tối đa hóa khả năng tái sử dụng KV cache và cải thiện hiệu quả serving của máy chủ LLM.",
         tags: ["KV cache", "batching", "LLM Serving", "Rust"],
       },
       {
         name: "Rust Tokenizer Sidecar",
         description:
-          "Sidecar moderation và tokenization được tối ưu, đạt throughput cao hơn khoảng 20 lần so với baseline Python Triton.",
+          "Sidecar được tối ưu cho moderation và tokenization, đạt throughput cao gấp khoảng 20 lần baseline sử dụng Python Triton.",
         tags: ["Rust", "tokenizer", "performance", "moderation"],
       },
       {
@@ -342,19 +342,19 @@ export const localeContent: Record<Locale, LocaleContent> = {
       {
         name: "ChatEI Chatbot",
         description:
-          "Chatbot doanh nghiệp cho tài liệu nội bộ với cải thiện indexing, retrieval và thời gian phản hồi nhanh hơn 30%.",
+          "Chatbot doanh nghiệp dành cho tài liệu nội bộ, với quy trình indexing và retrieval được cải thiện, giúp giảm 30% thời gian phản hồi.",
         tags: ["AI", "Chatbot", "llama.cpp", "RAG"],
       },
       {
         name: "Hệ thống TTS tiếng Việt end-to-end",
         description:
-          "Xây dựng bộ dữ liệu và huấn luyện các mô hình TTS theo vùng miền cho 5 giọng đọc, đồng thời tối ưu suy luận bằng triển khai ONNX và containerization. Hoàn thiện pipeline end-to-end để crawl tin tức, xử lý dữ liệu và tạo audio bằng mô hình TTS tiếng Việt.",
+          "Xây dựng bộ dữ liệu và huấn luyện mô hình TTS theo phương ngữ cho 5 giọng đọc, sau đó tối ưu suy luận thông qua triển khai ONNX và container hóa. Hoàn thiện pipeline end-to-end để thu thập tin tức, xử lý dữ liệu và tạo âm thanh bằng các mô hình TTS tiếng Việt.",
         tags: ["Python", "ONNX", "Docker", "TTS"],
       },
       {
         name: "Dự đoán giá nhà Hà Nội",
         description:
-          "Tạo web app dự đoán giá thuê với pipeline crawl dữ liệu hằng ngày, đánh giá mô hình và tự động retrain khi phát hiện data drift.",
+          "Xây dựng web app dự đoán giá thuê cùng pipeline thu thập dữ liệu hằng ngày, đánh giá mô hình và tự động huấn luyện lại khi phát hiện data drift.",
         tags: ["Python", "Data Science", "MLOps", "Web App"],
       },
       {
@@ -364,9 +364,9 @@ export const localeContent: Record<Locale, LocaleContent> = {
         tags: ["Deep Learning", "CNN", "Web App"],
       },
       {
-        name: "POC Avatar nói chuyện",
+        name: "PoC Talking Avatar",
         description:
-          "Tạo một nền tảng web proof-of-concept để sinh video talking-head giống người thật từ văn bản bằng các mô hình tiền huấn luyện.",
+          "Xây dựng nền tảng web proof-of-concept có khả năng tạo video talking-head chân thực từ văn bản bằng các mô hình tiền huấn luyện.",
         tags: ["SadTalker", "Tacotron2", "Web App"],
       },
     ],
@@ -378,7 +378,7 @@ export const localeContent: Record<Locale, LocaleContent> = {
         period: "Oct 2025 - Present",
         highlights: [
           "Dẫn dắt nhóm 4 kỹ sư xây dựng hệ thống RAG và hội thoại AI cho môi trường sản xuất.",
-          "Xây dựng pipeline xử lý tài liệu và truy xuất gồm parsing, chunking, vector indexing, semantic search, reranking, caching và query filtering.",
+          "Xây dựng pipeline xử lý và truy xuất tài liệu gồm parsing, chunking, vector indexing, semantic search, reranking, caching và query filtering.",
           "Tối ưu các thành phần LLM-serving gồm request clustering, tái sử dụng KV-cache, moderation và Rust tokenizer sidecar đạt throughput cao gấp 20 lần so với baseline Python.",
         ],
       },
@@ -388,9 +388,9 @@ export const localeContent: Record<Locale, LocaleContent> = {
         location: "Tokyo, Japan",
         period: "Nov 2024 - Sep 2025",
         highlights: [
-          "Xây dựng các sản phẩm RAG cho doanh nghiệp gồm ChatEI, chatbot hỏi đáp tài liệu và agent-based search workflow.",
+          "Xây dựng các sản phẩm RAG cho doanh nghiệp, bao gồm ChatEI, hệ thống hỏi đáp tài liệu và quy trình tìm kiếm dựa trên agent.",
           "Giảm độ trễ phản hồi đầu tiên từ 3.5s xuống 2.5s thông qua tối ưu search, tăng tốc embedding inference bằng llama.cpp và caching.",
-          "Đóng góp vào cả backend services và phát triển giao diện khi cần.",
+          "Đóng góp vào các dịch vụ backend và phát triển giao diện khi cần thiết.",
         ],
       },
       {
@@ -399,7 +399,7 @@ export const localeContent: Record<Locale, LocaleContent> = {
         location: "Remote",
         period: "May 2025 - Aug 2025",
         highlights: [
-          "Đóng góp cho llama.cpp, một C/C++ LLM inference engine mã nguồn mở phổ biến với khoảng 100k GitHub stars.",
+          "Đóng góp cho llama.cpp, một LLM inference engine C/C++ mã nguồn mở phổ biến với khoảng 100 nghìn GitHub stars.",
           "Thêm hỗ trợ cho các mô hình embedding và ranking mới bằng cách chuyển chúng sang định dạng GGUF và triển khai các đồ thị suy luận.",
         ],
       },
@@ -409,9 +409,9 @@ export const localeContent: Record<Locale, LocaleContent> = {
         location: "Hanoi, Vietnam",
         period: "May 2022 - Sep 2023",
         highlights: [
-          "Xây dựng công cụ xác minh người nộp thuế nội bộ với upload tài liệu và trích xuất dữ liệu tự động.",
+          "Xây dựng công cụ xác minh người nộp thuế nội bộ với tính năng tự động tải lên tài liệu và trích xuất dữ liệu.",
           "Huấn luyện mô hình deep learning để vượt CAPTCHA trên cổng thuế chính thức, đạt độ chính xác 93% và giảm 83% thời gian xác minh thủ công.",
-          "Phát triển proof-of-concept platform tạo video talking-head từ văn bản bằng SadTalker và Tacotron2.",
+          "Phát triển nền tảng proof-of-concept tạo video talking-head từ văn bản bằng SadTalker và Tacotron2.",
         ],
       },
     ],
@@ -464,7 +464,7 @@ export const localeContent: Record<Locale, LocaleContent> = {
     meta: {
       siteTitle: "Dinh Trong Huy - AIエンジニア",
       siteDescription:
-        "LLM推論、サービング、バッチ処理、検索、プロダクション向けAI基盤に取り組むAIエンジニア。",
+        "LLM推論、サービング、バッチ処理、検索システム、プロダクションAI基盤に取り組むAIエンジニア。",
     },
     ui: {
       home: "ホーム",
@@ -479,7 +479,7 @@ export const localeContent: Record<Locale, LocaleContent> = {
       closeMenu: "メニューを閉じる",
       viewProjects: "プロジェクトを見る",
       readBlog: "ブログを読む",
-      selectedTechnicalWork: "厳選した技術成果",
+      selectedTechnicalWork: "主な技術プロジェクト",
       technicalWriting: "技術記事",
       blogComingSoon: "ブログ記事は近日公開予定です。",
       viewAllPosts: "すべての記事を見る",
@@ -490,7 +490,7 @@ export const localeContent: Record<Locale, LocaleContent> = {
       backHome: "ホームに戻る",
       blogIndexDescription: "AI、ソフトウェア工学、テクノロジーに関する記事。",
       blogIndexTitle: "ブログ",
-      blogLead: "AI、ソフトウェア工学、テクノロジーについての考え。",
+      blogLead: "AI、ソフトウェアエンジニアリング、テクノロジーについての考察。",
       notFoundTitle: "404 - ページが見つかりません",
       notFoundLead: "ページが見つかりません",
       notFoundBody: "お探しのページは存在しないか、移動しました。",
@@ -504,7 +504,7 @@ export const localeContent: Record<Locale, LocaleContent> = {
       location: "日本",
     },
     about: [
-      "私は問題解決を楽しむ結果志向のAIエンジニアです。ハノイ工科大学で情報技術の学士号を取得し、GPAは3.5でした。AIと機械学習に強い関心があり、チャットボットの構築、モデル推論の最適化、llama.cppのようなオープンソースプロジェクトへの貢献を実践してきました。",
+      "私は情熱と成果志向を持つAIエンジニアです。ハノイ工科大学で情報技術の学士号を取得し、GPAは3.5でした。AIと機械学習に強い関心があり、チャットボットの構築、モデル推論の最適化、llama.cppなどのオープンソースプロジェクトへの貢献に取り組んできました。",
       "データ収集やモデル学習から、デプロイやUI開発まで、エンドツーエンドのシステムを作ることが好きです。技術を通じて、効率的で実用的、そして価値のある解決策を生み出すことが私の目標です。",
     ],
     technicalWork: [
@@ -535,13 +535,13 @@ export const localeContent: Record<Locale, LocaleContent> = {
       {
         name: "ChatEI チャットボット",
         description:
-          "社内文書から質問に答えるチャットボットを構築し、インデックス作成、検索、応答時間を30%改善しました。",
+          "社内文書向けのエンタープライズチャットボット。インデックス作成と検索を改善し、応答時間を30%短縮しました。",
         tags: ["AI", "Chatbot", "llama.cpp", "RAG"],
       },
       {
         name: "ベトナム語音声合成システム",
         description:
-          "5つの音声に対して方言別TTSモデルのデータセット作成と学習を行い、ONNXデプロイとコンテナ化で推論を最適化しました。ニュース収集、データ処理、ベトナム語TTSによる音声生成までのエンドツーエンドパイプラインも構築しました。",
+          "5種類の音声向けに方言別TTSモデルのデータセットを構築して学習を行い、ONNXデプロイとコンテナ化によって推論を最適化しました。ニュース収集、データ処理、ベトナム語TTSモデルによる音声生成までを担うエンドツーエンドパイプラインも構築しました。",
         tags: ["Python", "ONNX", "Docker", "TTS"],
       },
       {
@@ -593,7 +593,7 @@ export const localeContent: Record<Locale, LocaleContent> = {
         period: "May 2025 - Aug 2025",
         highlights: [
           "約10万のGitHubスターを持つ人気のC/C++ LLM推論エンジン llama.cpp に貢献しました。",
-          "新しいembeddingおよびrankingモデルをGGUF形式に変換し、推論グラフを実装して対応を追加しました。",
+          "新しい埋め込みモデルとランキングモデルをGGUF形式に変換し、推論グラフを実装することでサポートを追加しました。",
         ],
       },
       {
@@ -603,7 +603,7 @@ export const localeContent: Record<Locale, LocaleContent> = {
         period: "May 2022 - Sep 2023",
         highlights: [
           "文書アップロードとデータ抽出を自動化した内部の納税者確認ツールを構築しました。",
-          "公式納税ポータルのCAPTCHAを突破する深層学習モデルを学習し、93%の精度と83%の手作業削減を達成しました。",
+          "公式納税ポータルのCAPTCHAを突破する深層学習モデルを学習し、93%の精度を達成するとともに、手作業による確認時間を83%削減しました。",
           "SadTalker と Tacotron2 を使って、テキストからトーキングヘッド動画を生成するPoCプラットフォームを開発しました。",
         ],
       },
