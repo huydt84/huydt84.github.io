@@ -1,0 +1,55 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+import GiscusComments from "../components/site/GiscusComments.astro";
+
+export interface Props {
+  title: string;
+  description: string;
+  pubDate: Date;
+  tags?: string[];
+  slug: string;
+}
+
+const { title, description, pubDate, tags, slug } = Astro.props;
+const canonical = `/blog/${slug}`;
+---
+
+<BaseLayout
+  title={`${title} — huydt84`}
+  description={description}
+  canonical={canonical}
+>
+  <article class="mx-auto max-w-3xl px-4 pt-16">
+    <a href="/blog" class="mb-8 inline-flex text-sm text-muted-foreground hover:text-foreground transition-colors">
+      &larr; Back to Blog
+    </a>
+
+    <header class="mb-10">
+      <h1 class="text-3xl sm:text-4xl font-bold tracking-tight mb-3">{title}</h1>
+      <div class="flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
+        <time datetime={pubDate.toISOString()}>
+          {pubDate.toLocaleDateString("en-US", {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          })}
+        </time>
+        {tags && tags.length > 0 && (
+          <div class="flex flex-wrap gap-1.5">
+            {tags.map((tag) => (
+              <span class="rounded-full bg-secondary px-2.5 py-0.5 text-xs font-medium text-secondary-foreground">
+                {tag}
+              </span>
+            ))}
+          </div>
+        )}
+      </div>
+    </header>
+
+    <div class="prose prose-sm sm:prose-base dark:prose-invert max-w-none">
+      <slot />
+    </div>
+  </article>
+
+  <GiscusComments />
+</BaseLayout>

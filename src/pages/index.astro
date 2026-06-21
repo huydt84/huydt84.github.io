@@ -1,0 +1,92 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/site/Header.astro";
+import Hero from "../components/site/Hero.astro";
+import ProjectCard from "../components/site/ProjectCard.astro";
+import ExperienceTimeline from "../components/site/ExperienceTimeline.astro";
+import SkillCloud from "../components/site/SkillCloud.astro";
+import BlogCard from "../components/site/BlogCard.astro";
+import Footer from "../components/site/Footer.astro";
+import { profile } from "../data/profile";
+import { experiences } from "../data/experience";
+import { projects } from "../data/projects";
+import { skills } from "../data/skills";
+import { getCollection } from "astro:content";
+
+const recentPosts = (await getCollection("blog", ({ data }) => !data.draft))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
+---
+
+<BaseLayout title={`${profile.name} - Portfolio`} description={profile.headline}>
+  <Header />
+
+  <Hero />
+
+  <main class="mx-auto max-w-4xl px-4">
+    <section id="projects" class="mb-20 scroll-mt-20">
+      <h2 class="mb-8 text-2xl font-bold tracking-tight">Featured Projects</h2>
+      <div class="grid gap-5 sm:grid-cols-2">
+        {projects.map((project) => (
+          <ProjectCard project={project} />
+        ))}
+      </div>
+    </section>
+
+    <section id="experience" class="mb-20 scroll-mt-20">
+      <h2 class="mb-8 text-2xl font-bold tracking-tight">Experience</h2>
+      <ExperienceTimeline experiences={experiences} />
+    </section>
+
+    <section id="blog" class="mb-20 scroll-mt-20">
+      <h2 class="mb-8 text-2xl font-bold tracking-tight">Latest Blog Posts</h2>
+      {recentPosts.length === 0 ? (
+        <div class="rounded-lg border border-dashed p-8 text-center">
+          <p class="text-muted-foreground">Blog posts coming soon.</p>
+        </div>
+      ) : (
+        <>
+          <div class="grid gap-5 sm:grid-cols-2">
+            {recentPosts.map((post) => (
+              <BlogCard
+                title={post.data.title}
+                description={post.data.description}
+                pubDate={post.data.pubDate.toLocaleDateString("en-US", {
+                  year: "numeric",
+                  month: "short",
+                  day: "numeric",
+                })}
+                tags={post.data.tags}
+                href={`/blog/${post.id}`}
+              />
+            ))}
+          </div>
+          <div class="mt-8 text-center">
+            <a
+              href="/blog"
+              class="inline-flex text-sm text-muted-foreground hover:text-foreground transition-colors"
+            >
+              View all posts &rarr;
+            </a>
+          </div>
+        </>
+      )}
+    </section>
+
+    <section id="skills" class="mb-20 scroll-mt-20">
+      <h2 class="mb-8 text-2xl font-bold tracking-tight">Skills</h2>
+      <SkillCloud skills={skills} />
+    </section>
+
+    <section id="about" class="mb-20 scroll-mt-20">
+      <h2 class="mb-8 text-2xl font-bold tracking-tight">About</h2>
+      <div class="max-w-3xl space-y-4 text-muted-foreground">
+        {profile.about.map((p) => (
+          <p class="leading-relaxed">{p}</p>
+        ))}
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>

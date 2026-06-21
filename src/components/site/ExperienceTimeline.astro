@@ -1,0 +1,33 @@
+---
+import type { Experience } from "@/data/experience";
+
+export interface Props {
+  experiences: Experience[];
+}
+
+const { experiences } = Astro.props;
+---
+
+<div class="relative space-y-8 before:absolute before:left-[7px] before:top-2 before:h-[calc(100%-1rem)] before:w-px before:bg-border">
+  {experiences.map((exp: Experience) => (
+    <div class="relative pl-8">
+      <div class="absolute left-0 top-1.5 h-4 w-4 rounded-full border-2 border-border bg-background" />
+
+      <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 mb-1">
+        <h3 class="text-xl font-bold">{exp.role}</h3>
+        <span class="text-sm text-muted-foreground shrink-0">{exp.period}</span>
+      </div>
+      <p class="mb-2 text-sm font-medium text-muted-foreground">
+        {exp.company} &mdash; {exp.location}
+      </p>
+      <ul class="space-y-1.5 text-sm text-muted-foreground">
+        {exp.highlights.map((h: string) => (
+          <li class="flex gap-2">
+            <span class="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-muted-foreground" />
+            <span>{h}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  ))}
+</div>

@@ -1,0 +1,80 @@
+---
+import "../styles/global.css";
+import { site } from "../data/site";
+
+export interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  canonical?: string;
+}
+
+const {
+  title = site.title,
+  description = site.description,
+  image = site.ogImage,
+  canonical,
+} = Astro.props;
+
+const ogImage = image ? (image.startsWith("http") ? image : site.url + image) : undefined;
+const canonicalUrl = canonical ?? Astro.url.pathname;
+const fullUrl = site.url + canonicalUrl;
+---
+
+<!doctype html>
+<html lang={site.lang} class="">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content={site.author} />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="canonical" href={fullUrl} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={fullUrl} />
+    <meta property="og:site_name" content={site.title} />
+    {ogImage && (
+      <>
+        <meta property="og:image" content={ogImage} />
+        <meta name="twitter:image" content={ogImage} />
+      </>
+    )}
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+
+    <script is:inline>
+      (function () {
+        var theme = localStorage.getItem("theme");
+        if (!theme) {
+          theme = window.matchMedia("(prefers-color-scheme: dark)").matches
+            ? "dark"
+            : "light";
+        }
+        if (theme === "dark") {
+          document.documentElement.classList.add("dark");
+        }
+        window.__theme = theme;
+      })();
+      window.__toggleTheme = function () {
+        var isDark = document.documentElement.classList.toggle("dark");
+        var theme = isDark ? "dark" : "light";
+        localStorage.setItem("theme", theme);
+        window.__theme = theme;
+      };
+    </script>
+    <style>
+      html { scroll-behavior: smooth; }
+    </style>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
