@@ -1,0 +1,35 @@
+---
+import { getLocaleContent } from "@/data/i18n";
+import { localeLabels, localeShortLabels, localizePath, type Locale } from "@/lib/locale";
+
+export interface Props {
+  currentLocale: Locale;
+  currentPath: string;
+  compact?: boolean;
+}
+
+const { currentLocale, currentPath, compact = false } = Astro.props;
+const copy = getLocaleContent(currentLocale);
+const locales: Locale[] = ["en", "vi", "ja"];
+---
+
+<div class="inline-flex items-center rounded-full border bg-background p-1 text-xs shadow-sm" aria-label={copy.ui.language}>
+  {locales.map((locale) => {
+    const href = localizePath(currentPath, locale);
+    const label = compact ? localeShortLabels[locale] : localeLabels[locale];
+    const active = locale === currentLocale;
+
+    return (
+      <a
+        href={href}
+        aria-current={active ? "page" : undefined}
+        class:list={[
+          "rounded-full px-3 py-1.5 transition-colors",
+          active ? "bg-foreground text-background" : "text-muted-foreground hover:bg-accent hover:text-foreground",
+        ]}
+      >
+        {label}
+      </a>
+    );
+  })}
+</div>

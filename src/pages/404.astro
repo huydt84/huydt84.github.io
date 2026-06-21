@@ -1,19 +1,20 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { getLocaleContent } from "../data/i18n";
+
+const copy = getLocaleContent("en");
 ---
 
-<BaseLayout title="404 — Page Not Found">
+<BaseLayout title={copy.ui.notFoundTitle} description={copy.ui.notFoundBody} locale="en" siteName={copy.meta.siteTitle}>
   <div class="mx-auto flex min-h-[60vh] max-w-lg flex-col items-center justify-center px-4 text-center">
     <h1 class="mb-4 text-6xl font-bold tracking-tight">404</h1>
-    <p class="mb-2 text-lg font-medium">Page not found</p>
-    <p class="mb-8 text-sm text-muted-foreground">
-      The page you are looking for does not exist or has been moved.
-    </p>
+    <p class="mb-2 text-lg font-medium">{copy.ui.notFoundLead}</p>
+    <p class="mb-8 text-sm text-muted-foreground">{copy.ui.notFoundBody}</p>
     <a
       href="/"
       class="inline-flex h-10 items-center justify-center rounded-lg bg-primary px-6 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
     >
-      Back to Home
+      {copy.ui.backHome}
     </a>
   </div>
 </BaseLayout>

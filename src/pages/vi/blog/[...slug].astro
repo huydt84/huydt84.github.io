@@ -1,11 +1,11 @@
 ---
 import { render } from "astro:content";
 import type { CollectionEntry } from "astro:content";
-import BlogPostLayout from "../../layouts/BlogPostLayout.astro";
-import { getBlogSlug, getLocalizedBlogPosts } from "../../lib/blog";
+import BlogPostLayout from "../../../layouts/BlogPostLayout.astro";
+import { getBlogSlug, getLocalizedBlogPosts } from "../../../lib/blog";
 
 export async function getStaticPaths() {
-  const posts = await getLocalizedBlogPosts("en");
+  const posts = await getLocalizedBlogPosts("vi");
   return posts.map((post) => ({
     params: { slug: getBlogSlug(post) },
     props: { post },
@@ -26,8 +26,8 @@ const { Content } = await render(post);
   pubDate={post.data.pubDate}
   tags={post.data.tags}
   slug={getBlogSlug(post)}
-  locale="en"
-  siteName="Dinh Trong Huy - AI Engineer"
+  locale="vi"
+  siteName="Dinh Trong Huy - Kỹ sư AI"
 >
   <Content />
 </BlogPostLayout>

@@ -1,34 +1,63 @@
 ---
-import { profile } from "@/data/profile";
+import { site } from "@/data/site";
+import { getLocaleContent } from "@/data/i18n";
+import { localizePath, type Locale } from "@/lib/locale";
+import LanguageSwitcher from "./LanguageSwitcher.astro";
+
+export interface Props {
+  locale: Locale;
+  variant?: "home" | "content";
+}
+
+const { locale, variant = "home" } = Astro.props;
+const copy = getLocaleContent(locale);
+const currentPath = Astro.url.pathname;
+const homePath = localizePath("/", locale);
+const blogPath = localizePath("/blog", locale);
+const navItems =
+  variant === "home"
+    ? [
+        { href: "#about", label: copy.ui.about },
+        { href: "#experience", label: copy.ui.experience },
+        { href: "#projects", label: copy.ui.projects },
+        { href: "#blog", label: copy.ui.blog },
+      ]
+    : [
+        { href: homePath, label: copy.ui.home },
+        { href: blogPath, label: copy.ui.blog },
+      ];
 ---
 
 <header class="sticky top-0 z-50 w-full border-b bg-background/80 backdrop-blur-xs">
   <div class="mx-auto flex max-w-4xl items-center justify-between px-4 py-3">
-    <a href="#" class="text-lg font-semibold tracking-tight">{profile.name}</a>
+    <a href={homePath} class="text-lg font-semibold tracking-tight">{site.author}</a>
 
-    <nav class="hidden md:flex items-center gap-6">
-      <a href="#about" class="text-sm text-muted-foreground hover:text-foreground transition-colors">About</a>
-      <a href="#experience" class="text-sm text-muted-foreground hover:text-foreground transition-colors">Experience</a>
-      <a href="#projects" class="text-sm text-muted-foreground hover:text-foreground transition-colors">Projects</a>
-      <a href="#blog" class="text-sm text-muted-foreground hover:text-foreground transition-colors">Blog</a>
+    <nav class="hidden items-center gap-6 md:flex">
+      {navItems.map((item) => (
+        <a href={item.href} class="text-sm text-muted-foreground transition-colors hover:text-foreground">
+          {item.label}
+        </a>
+      ))}
 
       <button
         id="theme-toggle-desktop"
         onclick="window.__toggleTheme()"
-        class="rounded-md p-2 text-muted-foreground hover:text-foreground hover:bg-accent transition-colors"
-        aria-label="Toggle dark mode"
+        class="rounded-md p-2 text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+        aria-label={copy.ui.theme}
       >
         <svg id="sun-icon-desktop" class="hidden dark:block" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
         <svg id="moon-icon-desktop" class="block dark:hidden" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
       </button>
+
+      <LanguageSwitcher currentLocale={locale} currentPath={currentPath} compact />
     </nav>
 
-    <div class="flex md:hidden items-center gap-2">
+    <div class="flex items-center gap-2 md:hidden">
       <button
         id="theme-toggle-mobile"
         onclick="window.__toggleTheme()"
-        class="rounded-md p-2 text-muted-foreground hover:text-foreground transition-colors"
-        aria-label="Toggle dark mode"
+        class="rounded-md p-2 text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+        aria-label={copy.ui.theme}
       >
         <svg id="sun-icon-mobile" class="hidden dark:block" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
         <svg id="moon-icon-mobile" class="block dark:hidden" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
@@ -37,8 +66,8 @@ import { profile } from "@/data/profile";
       <button
         id="mobile-menu-btn"
         onclick="window.__toggleMobileMenu()"
-        class="rounded-md p-2 text-muted-foreground hover:text-foreground transition-colors"
-        aria-label="Open menu"
+        class="rounded-md p-2 text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+        aria-label={copy.ui.openMenu}
       >
         <svg id="menu-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
         <svg id="close-icon" class="hidden" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
@@ -46,13 +75,20 @@ import { profile } from "@/data/profile";
     </div>
   </div>
 
-  <div id="mobile-menu" class="hidden md:hidden border-t px-4 py-4 bg-background">
+  <div id="mobile-menu" class="hidden border-t bg-background px-4 py-4 md:hidden">
     <nav class="flex flex-col gap-4">
-      <a href="#about" onclick="window.__closeMobileMenu()" class="text-sm text-muted-foreground hover:text-foreground transition-colors">About</a>
-      <a href="#experience" onclick="window.__closeMobileMenu()" class="text-sm text-muted-foreground hover:text-foreground transition-colors">Experience</a>
-      <a href="#projects" onclick="window.__closeMobileMenu()" class="text-sm text-muted-foreground hover:text-foreground transition-colors">Projects</a>
-      <a href="#blog" onclick="window.__closeMobileMenu()" class="text-sm text-muted-foreground hover:text-foreground transition-colors">Blog</a>
-      <a href={profile.cvPath} target="_blank" onclick="window.__closeMobileMenu()" class="text-sm text-muted-foreground hover:text-foreground transition-colors">CV</a>
+      {navItems.map((item) => (
+        <a
+          href={item.href}
+          onclick="window.__closeMobileMenu()"
+          class="text-sm text-muted-foreground transition-colors hover:text-foreground"
+        >
+          {item.label}
+        </a>
+      ))}
+      <div class="pt-2">
+        <LanguageSwitcher currentLocale={locale} currentPath={currentPath} />
+      </div>
     </nav>
   </div>
 </header>

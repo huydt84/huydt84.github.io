@@ -1,6 +1,9 @@
 ---
 import BaseLayout from "./BaseLayout.astro";
+import Header from "../components/site/Header.astro";
 import GiscusComments from "../components/site/GiscusComments.astro";
+import { getLocaleContent } from "@/data/i18n";
+import type { Locale } from "@/lib/locale";
 
 export interface Props {
   title: string;
@@ -8,27 +11,34 @@ export interface Props {
   pubDate: Date;
   tags?: string[];
   slug: string;
+  locale: Locale;
+  siteName?: string;
 }
 
-const { title, description, pubDate, tags, slug } = Astro.props;
-const canonical = `/blog/${slug}`;
+const { title, description, pubDate, tags, slug, locale, siteName } = Astro.props;
+const copy = getLocaleContent(locale);
+const canonical = locale === "en" ? `/blog/${slug}` : `/${locale}/blog/${slug}`;
 ---
 
 <BaseLayout
-  title={`${title} — huydt84`}
+  title={`${title} — ${siteName ?? "huydt84"}`}
   description={description}
   canonical={canonical}
+  locale={locale}
+  siteName={siteName}
 >
+  <Header locale={locale} variant="content" />
+
   <article class="mx-auto max-w-3xl px-4 pt-16">
-    <a href="/blog" class="mb-8 inline-flex text-sm text-muted-foreground hover:text-foreground transition-colors">
-      &larr; Back to Blog
+    <a href={locale === "en" ? "/blog" : `/${locale}/blog`} class="mb-8 inline-flex text-sm text-muted-foreground transition-colors hover:text-foreground">
+      &larr; {copy.ui.backToBlog}
     </a>
 
     <header class="mb-10">
-      <h1 class="text-3xl sm:text-4xl font-bold tracking-tight mb-3">{title}</h1>
+      <h1 class="mb-3 text-3xl font-bold tracking-tight sm:text-4xl">{title}</h1>
       <div class="flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
         <time datetime={pubDate.toISOString()}>
-          {pubDate.toLocaleDateString("en-US", {
+          {pubDate.toLocaleDateString(locale === "en" ? "en-US" : locale === "vi" ? "vi-VN" : "ja-JP", {
             year: "numeric",
             month: "long",
             day: "numeric",
@@ -46,10 +56,10 @@ const canonical = `/blog/${slug}`;
       </div>
     </header>
 
-    <div class="prose prose-sm sm:prose-base dark:prose-invert max-w-none">
+    <div class="prose prose-sm max-w-none dark:prose-invert sm:prose-base">
       <slot />
     </div>
   </article>
 
-  <GiscusComments />
+  <GiscusComments locale={locale} />
 </BaseLayout>

@@ -1,8 +1,15 @@
 ---
-import { profile } from "@/data/profile";
-import { socials } from "@/data/socials";
-import type { SocialLink } from "@/data/socials";
+import { site } from "@/data/site";
+import { getLocaleContent } from "@/data/i18n";
+import { type Locale } from "@/lib/locale";
 import { Button } from "@/components/ui/button";
+
+export interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const copy = getLocaleContent(locale);
 
 const iconMap: Record<string, string> = {
   envelope: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>`,
@@ -12,28 +19,28 @@ const iconMap: Record<string, string> = {
 };
 ---
 
-<section class="flex flex-col items-center justify-center min-h-[calc(100vh-4rem)] px-4 text-center">
-  <h1 class="text-4xl sm:text-5xl font-bold tracking-tight mb-4">{profile.name}</h1>
-  <p class="text-xl sm:text-2xl text-foreground mb-3 max-w-2xl">{profile.headline}</p>
-  <p class="text-base text-muted-foreground mb-8 max-w-xl">{profile.tagline}</p>
+<section class="flex min-h-[calc(100vh-4rem)] flex-col items-center justify-center px-4 text-center">
+  <h1 class="mb-4 text-4xl font-bold tracking-tight sm:text-5xl">{site.author}</h1>
+  <p class="mb-3 max-w-2xl text-xl text-foreground sm:text-2xl">{copy.hero.headline}</p>
+  <p class="mb-8 max-w-xl text-base text-muted-foreground">{copy.hero.tagline}</p>
 
-  <div class="flex flex-wrap justify-center gap-4 mb-10">
+  <div class="mb-10 flex flex-wrap justify-center gap-4">
     <a href="#projects">
-      <Button>View Projects</Button>
+      <Button>{copy.ui.viewProjects}</Button>
     </a>
     <a href="#blog">
-      <Button variant="outline">Read Blog</Button>
+      <Button variant="outline">{copy.ui.readBlog}</Button>
     </a>
   </div>
 
   <div class="flex items-center gap-4">
-    {socials.map((link: SocialLink) => (
+    {copy.socials.map((link) => (
       <a
         href={link.url}
         target={link.label === "Email" || link.label === "CV" ? undefined : "_blank"}
         rel={link.label === "Email" || link.label === "CV" ? undefined : "noopener noreferrer"}
         aria-label={link.label}
-        class="rounded-full p-3 text-muted-foreground hover:text-foreground hover:bg-accent transition-colors"
+        class="rounded-full p-3 text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
         set:html={iconMap[link.icon]}
       />
     ))}

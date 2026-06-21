@@ -1,12 +1,20 @@
 ---
 import { giscusConfig, isGiscusConfigured } from "../../data/giscus";
+import { getLocaleContent } from "@/data/i18n";
+import { type Locale } from "@/lib/locale";
 
+export interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const copy = getLocaleContent(locale);
 const configured = isGiscusConfigured(giscusConfig);
 ---
 
 <section class="mx-auto max-w-3xl px-4 pb-16">
   <div class="border-t pt-10">
-    <h2 class="mb-6 text-xl font-bold tracking-tight">Comments</h2>
+    <h2 class="mb-6 text-xl font-bold tracking-tight">{copy.ui.comments}</h2>
 
     {configured ? (
       <script
@@ -21,21 +29,23 @@ const configured = isGiscusConfigured(giscusConfig);
         data-emit-metadata={giscusConfig.emitMetadata}
         data-input-position={giscusConfig.inputPosition}
         data-theme={giscusConfig.theme}
-        data-lang={giscusConfig.lang}
+        data-lang={locale}
         data-loading="lazy"
         async
         is:inline
       />
     ) : (
       <div class="rounded-lg border border-dashed p-6 text-center text-sm text-muted-foreground">
-        <p class="mb-2 font-medium">Comments are not yet configured.</p>
+        <p class="mb-2 font-medium">{copy.ui.commentsNotConfigured}</p>
         <p class="mb-1">
           To enable Giscus comments, follow the instructions in
           <code class="mx-1 rounded bg-muted px-1.5 py-0.5 text-xs">src/data/giscus.ts</code>.
         </p>
         <ol class="mx-auto mt-3 max-w-md list-inside list-decimal space-y-1 text-left">
           <li>Enable GitHub Discussions in your repo settings.</li>
-          <li>Visit <a href="https://giscus.app" class="underline hover:text-foreground">giscus.app</a> and configure it for this repo.</li>
+          <li>
+            Visit <a href="https://giscus.app" class="underline hover:text-foreground">giscus.app</a> and configure it for this repo.
+          </li>
           <li>Copy the <code>repoId</code>, <code>category</code>, and <code>categoryId</code> values.</li>
           <li>Update them in <code>src/data/giscus.ts</code>.</li>
         </ol>

@@ -1,12 +1,15 @@
 ---
 import "../styles/global.css";
 import { site } from "../data/site";
+import { localizePath, locales, toLanguageTag, type Locale, defaultLocale } from "@/lib/locale";
 
 export interface Props {
   title?: string;
   description?: string;
   image?: string;
   canonical?: string;
+  locale?: Locale;
+  siteName?: string;
 }
 
 const {
@@ -14,15 +17,21 @@ const {
   description = site.description,
   image = site.ogImage,
   canonical,
+  locale = defaultLocale,
+  siteName = site.title,
 } = Astro.props;
 
 const ogImage = image ? (image.startsWith("http") ? image : site.url + image) : undefined;
 const canonicalUrl = canonical ?? Astro.url.pathname;
 const fullUrl = site.url + canonicalUrl;
+const alternateLinks = locales.map((candidate) => ({
+  hreflang: toLanguageTag(candidate),
+  href: site.url + localizePath(canonicalUrl, candidate),
+}));
 ---
 
 <!doctype html>
-<html lang={site.lang} class="">
+<html lang={toLanguageTag(locale)} class="">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -33,12 +42,15 @@ const fullUrl = site.url + canonicalUrl;
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="canonical" href={fullUrl} />
+    {alternateLinks.map((alternate) => (
+      <link rel="alternate" hreflang={alternate.hreflang} href={alternate.href} />
+    ))}
 
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={fullUrl} />
-    <meta property="og:site_name" content={site.title} />
+    <meta property="og:site_name" content={siteName} />
     {ogImage && (
       <>
         <meta property="og:image" content={ogImage} />

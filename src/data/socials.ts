@@ -4,25 +4,6 @@ export interface SocialLink {
   icon: string;
 }
 
-export const socials: SocialLink[] = [
-  {
-    label: "Email",
-    url: "mailto:viethuy061002@gmail.com",
-    icon: "envelope",
-  },
-  {
-    label: "GitHub",
-    url: "https://github.com/huydt84",
-    icon: "github",
-  },
-  {
-    label: "LinkedIn",
-    url: "https://www.linkedin.com/in/huydt84",
-    icon: "linkedin",
-  },
-  {
-    label: "CV",
-    url: "/CV_06032026.pdf",
-    icon: "file-pdf",
-  },
-];
+import { getLocaleContent } from "./i18n";
+
+export const socials: SocialLink[] = getLocaleContent("en").socials;

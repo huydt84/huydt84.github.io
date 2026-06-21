@@ -1,16 +1,16 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
-import Header from "../components/site/Header.astro";
-import Hero from "../components/site/Hero.astro";
-import ProjectCard from "../components/site/ProjectCard.astro";
-import ExperienceTimeline from "../components/site/ExperienceTimeline.astro";
-import SkillCloud from "../components/site/SkillCloud.astro";
-import BlogCard from "../components/site/BlogCard.astro";
-import Footer from "../components/site/Footer.astro";
-import { getLocaleContent } from "../data/i18n";
-import { getBlogSlug, getLocalizedBlogPosts } from "../lib/blog";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Header from "../../components/site/Header.astro";
+import Hero from "../../components/site/Hero.astro";
+import ProjectCard from "../../components/site/ProjectCard.astro";
+import ExperienceTimeline from "../../components/site/ExperienceTimeline.astro";
+import SkillCloud from "../../components/site/SkillCloud.astro";
+import BlogCard from "../../components/site/BlogCard.astro";
+import Footer from "../../components/site/Footer.astro";
+import { getLocaleContent } from "../../data/i18n";
+import { getBlogSlug, getLocalizedBlogPosts } from "../../lib/blog";
 
-const locale = "en";
+const locale = "vi";
 const copy = getLocaleContent(locale);
 const recentPosts = (await getLocalizedBlogPosts(locale)).slice(0, 3);
 ---
@@ -22,7 +22,6 @@ const recentPosts = (await getLocalizedBlogPosts(locale)).slice(0, 3);
   siteName={copy.meta.siteTitle}
 >
   <Header locale={locale} variant="home" />
-
   <Hero locale={locale} />
 
   <main class="mx-auto max-w-4xl px-4">
@@ -53,18 +52,18 @@ const recentPosts = (await getLocalizedBlogPosts(locale)).slice(0, 3);
               <BlogCard
                 title={post.data.title}
                 description={post.data.description}
-                pubDate={post.data.pubDate.toLocaleDateString("en-US", {
+                pubDate={post.data.pubDate.toLocaleDateString("vi-VN", {
                   year: "numeric",
                   month: "short",
                   day: "numeric",
                 })}
                 tags={post.data.tags}
-                href={`/blog/${getBlogSlug(post)}`}
+                href={`/vi/blog/${getBlogSlug(post)}`}
               />
             ))}
           </div>
           <div class="mt-8 text-center">
-            <a href="/blog" class="inline-flex text-sm text-muted-foreground transition-colors hover:text-foreground">
+            <a href="/vi/blog" class="inline-flex text-sm text-muted-foreground transition-colors hover:text-foreground">
               {copy.ui.viewAllPosts} &rarr;
             </a>
           </div>

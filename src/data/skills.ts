@@ -1,14 +1,3 @@
-export const skills: string[] = [
-  "Python",
-  "PyTorch",
-  "TensorFlow",
-  "FastAPI",
-  "Django",
-  "Flask",
-  "Node.js",
-  "Flutter",
-  "Docker",
-  "Vector Databases",
-  "MongoDB",
-  "Git",
-];
+import { getLocaleContent } from "./i18n";
+
+export const skills: string[] = getLocaleContent("en").skills;

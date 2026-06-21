@@ -1,8 +1,15 @@
 ---
-import { profile } from "@/data/profile";
-import { socials } from "@/data/socials";
-import type { SocialLink } from "@/data/socials";
+import { site } from "@/data/site";
+import { getLocaleContent } from "@/data/i18n";
 import { Separator } from "@/components/ui/separator";
+import { type Locale } from "@/lib/locale";
+
+export interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const copy = getLocaleContent(locale);
 
 const iconMap: Record<string, string> = {
   envelope: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>`,
@@ -16,13 +23,13 @@ const iconMap: Record<string, string> = {
   <div class="mx-auto max-w-4xl px-4 py-12">
     <div class="flex flex-col items-center gap-4">
       <div class="flex items-center gap-4">
-        {socials.map((link: SocialLink) => (
+        {copy.socials.map((link) => (
           <a
             href={link.url}
             target={link.label === "Email" || link.label === "CV" ? undefined : "_blank"}
             rel={link.label === "Email" || link.label === "CV" ? undefined : "noopener noreferrer"}
             aria-label={link.label}
-            class="rounded-full p-2.5 text-muted-foreground hover:text-foreground hover:bg-accent transition-colors"
+            class="rounded-full p-2.5 text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
             set:html={iconMap[link.icon]}
           />
         ))}
@@ -31,7 +38,7 @@ const iconMap: Record<string, string> = {
       <Separator className="max-w-xs" />
 
       <p class="text-sm text-muted-foreground">
-        &copy; {new Date().getFullYear()} {profile.name}. All rights reserved.
+        &copy; {new Date().getFullYear()} {site.author}. {copy.ui.copyright}
       </p>
     </div>
   </div>
