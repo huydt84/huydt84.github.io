@@ -197,19 +197,23 @@ export const localeContent: Record<Locale, LocaleContent> = {
     skills: [
       {
         category: "LLM Serving",
-        items: ["MLX", "llama.cpp", "KV cache", "batching"],
+        items: ["MLX", "llama.cpp", "LLM Inference", "Triton"],
       },
       {
-        category: "Retrieval",
-        items: ["RAG", "Vector Databases", "semantic search", "reranking", "embedding models", "ranking models"],
+        category: "Database",
+        items: ["MongoDB", "PostgreSQL", "MySQL", "Milvus"],
+      },
+      {
+        category: "Language",
+        items: ["Python", "Golang", "C++", "JavaScript", "Flutter"],
       },
       {
         category: "Backend",
-        items: ["Python", "FastAPI", "Rust", "Node.js"],
+        items: ["FastAPI", "Gin Gonic", "Node.js"],
       },
       {
         category: "Infra",
-        items: ["Docker", "MongoDB", "Git"],
+        items: ["Docker", "Git"],
       },
       {
         category: "ML",
@@ -362,19 +366,23 @@ export const localeContent: Record<Locale, LocaleContent> = {
     skills: [
       {
         category: "LLM Serving",
-        items: ["MLX", "llama.cpp", "KV cache", "batching"],
+        items: ["MLX", "llama.cpp", "LLM Inference", "Triton"],
       },
       {
-        category: "Retrieval",
-        items: ["RAG", "Vector Databases", "semantic search", "reranking", "embedding models", "ranking models"],
+        category: "Database",
+        items: ["MongoDB", "PostgreSQL", "MySQL", "Milvus"],
+      },
+      {
+        category: "Language",
+        items: ["Python", "Golang", "C++", "JavaScript", "Flutter"],
       },
       {
         category: "Backend",
-        items: ["Python", "FastAPI", "Rust", "Node.js"],
+        items: ["FastAPI", "Gin Gonic", "Node.js"],
       },
       {
         category: "Infra",
-        items: ["Docker", "MongoDB", "Git"],
+        items: ["Docker", "Git"],
       },
       {
         category: "ML",
@@ -527,19 +535,23 @@ export const localeContent: Record<Locale, LocaleContent> = {
     skills: [
       {
         category: "LLM Serving",
-        items: ["MLX", "llama.cpp", "KV cache", "batching"],
+        items: ["MLX", "llama.cpp", "LLM Inference", "Triton"],
       },
       {
-        category: "Retrieval",
-        items: ["RAG", "Vector Databases", "semantic search", "reranking", "embedding models", "ranking models"],
+        category: "Database",
+        items: ["MongoDB", "PostgreSQL", "MySQL", "Milvus"],
+      },
+      {
+        category: "Language",
+        items: ["Python", "Golang", "C++", "JavaScript", "Flutter"],
       },
       {
         category: "Backend",
-        items: ["Python", "FastAPI", "Rust", "Node.js"],
+        items: ["FastAPI", "Gin Gonic", "Node.js"],
       },
       {
         category: "Infra",
-        items: ["Docker", "MongoDB", "Git"],
+        items: ["Docker", "Git"],
       },
       {
         category: "ML",
