@@ -14,8 +14,8 @@ export const projects: Project[] = [
   {
     name: "End-to-End Vietnamese Text-to-Speech System",
     description:
-      "Developed a complete system to crawl news, process text, and deploy TTS models with five regional Vietnamese voices.",
-    tags: ["Python", "ONNX", "Docker", "Web App"],
+      "Built dataset and trained dialect-specific TTS models for 5 voices, optimized inference via ONNX deployment and containerization. Built an end-to-end pipeline to crawl online news, process data, and generate audio using Vietnamese TTS models.",
+    tags: ["Python", "ONNX", "Docker", "TTS"],
   },
   {
     name: "Hanoi House Price Prediction",
