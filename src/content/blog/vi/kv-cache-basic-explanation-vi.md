@@ -183,13 +183,13 @@ n_{\text{ctx}} &= 1024
 \end{aligned}
 $$
 
-**Step 1 — số chiều của head:**
+**Step 1 - số chiều của head:**
 
 $$
 d_{\text{head}} = \frac{d_{\text{model}}}{n_{\text{head}}} = \frac{1600}{25} = 64
 $$
 
-**Step 2 — số phần tử KV cache cho một token trên toàn bộ các layer:**
+**Step 2 - số phần tử KV cache cho một token trên toàn bộ các layer:**
 
 $$
 \begin{aligned}
@@ -199,7 +199,7 @@ $$
 \end{aligned}
 $$
 
-**Step 3 — một sequence đầy đủ (1024 token):**
+**Step 3 - một sequence đầy đủ (1024 token):**
 
 $$
 \begin{aligned}
@@ -208,7 +208,7 @@ $$
 \end{aligned}
 $$
 
-**Step 4 — batch size 4, lưu ở fp16 (2 byte/phần tử):**
+**Step 4 - batch size 4, lưu ở fp16 (2 byte/phần tử):**
 
 $$
 \begin{aligned}

@@ -181,13 +181,13 @@ n_{\text{ctx}} &= 1024
 \end{aligned}
 $$
 
-**Step 1 — head dimension:**
+**Step 1 - head dimension:**
 
 $$
 d_{\text{head}} = \frac{d_{\text{model}}}{n_{\text{head}}} = \frac{1600}{25} = 64
 $$
 
-**Step 2 — KV cache elements for one token across all layers:**
+**Step 2 - KV cache elements for one token across all layers:**
 
 $$
 \begin{aligned}
@@ -197,7 +197,7 @@ $$
 \end{aligned}
 $$
 
-**Step 3 — one full sequence (1024 tokens):**
+**Step 3 - one full sequence (1024 tokens):**
 
 $$
 \begin{aligned}
@@ -206,7 +206,7 @@ $$
 \end{aligned}
 $$
 
-**Step 4 — batch of 4, stored in fp16 (2 bytes/element):**
+**Step 4 - batch of 4, stored in fp16 (2 bytes/element):**
 
 $$
 \begin{aligned}

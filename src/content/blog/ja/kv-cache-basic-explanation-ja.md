@@ -183,13 +183,13 @@ n_{\text{ctx}} &= 1024
 \end{aligned}
 $$
 
-**Step 1 — head dimension:**
+**Step 1 - head dimension:**
 
 $$
 d_{\text{head}} = \frac{d_{\text{model}}}{n_{\text{head}}} = \frac{1600}{25} = 64
 $$
 
-**Step 2 — 全レイヤーを通した 1 トークンあたりの KV cache 要素数:**
+**Step 2 - 全レイヤーを通した 1 トークンあたりの KV cache 要素数:**
 
 $$
 \begin{aligned}
@@ -199,7 +199,7 @@ $$
 \end{aligned}
 $$
 
-**Step 3 — 1 シーケンス全体（1024 トークン）:**
+**Step 3 - 1 シーケンス全体（1024 トークン）:**
 
 $$
 \begin{aligned}
@@ -208,7 +208,7 @@ $$
 \end{aligned}
 $$
 
-**Step 4 — batch size 4、fp16（2 bytes/element）で保存する場合:**
+**Step 4 - batch size 4、fp16（2 bytes/element）で保存する場合:**
 
 $$
 \begin{aligned}
