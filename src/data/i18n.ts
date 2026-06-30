@@ -158,7 +158,7 @@ export const localeContent: Record<Locale, LocaleContent> = {
         highlights: [
           "Led a team of four engineers building production RAG and conversational AI systems.",
           "Built document processing and retrieval pipelines with parsing, chunking, vector indexing, semantic search, reranking, caching, and query filtering.",
-          "Optimized LLM-serving components including request clustering, KV-cache reuse, moderation, and a Rust tokenizer sidecar reaching 20x throughput over a Python baseline.",
+          "Optimized LLM-harness components including prefix-caching context, request clustering for KV-cache reuse, two-layer moderation service.",
         ],
       },
       {
