@@ -43,9 +43,9 @@ Các logical block của Sequence A:
 
 Block table:
 ```
-logical block 0 -> physical block 7
-logical block 1 -> physical block 2
-logical block 2 -> physical block 9
+logical block 0 → physical block 7
+logical block 1 → physical block 2
+logical block 2 → physical block 9
 ```
 
 Physical memory:
